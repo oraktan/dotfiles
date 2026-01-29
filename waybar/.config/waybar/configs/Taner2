@@ -93,4 +93,11 @@
 	"custom/nightlight",
 	"custom/power",
 	],  
+    
+
+   
+"modules-center": [
+    "hyprland/workspaces#single",
+    "custom/windowscount"
+],
 }],

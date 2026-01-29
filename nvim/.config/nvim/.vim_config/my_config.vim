@@ -1,7 +1,7 @@
 " write all config settings here
 
 
-colorscheme desert 
+"colorscheme desert 
 
 
 " --- Temel Ayarlar ---
@@ -118,3 +118,14 @@ set autochdir
 " Görsel modda indenting (tab ile)
 " vnoremap < <gv
 " vnoremap > >gv
+
+
+"" Dosya açıldığında imleci son konumda başlat
+" Dosya açıldığında imleci son konuma getir
+augroup vimrc-remember-cursor
+  autocmd!
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+augroup END

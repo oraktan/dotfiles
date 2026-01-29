@@ -298,3 +298,27 @@ window#waybar.empty #window {
 	min-height: 10px;
 	border-radius: 5px;
 }
+
+
+#workspaces.single {
+    background: transparent;    /* Arka planı tamamen kaldırır */
+}
+
+#workspaces.single button {
+    color: #ff0000;             /* Yazıyı (sayıyı) kırmızı yapar */
+    padding: 0 5px;
+}
+
+#workspaces.single button.active {
+    color: #ff0000;             /* Aktif olduğunda da kırmızı kalmasını sağlar */
+    font-weight: bold;          /* Daha belirgin olması için kalın yapar */
+}
+
+
+#custom-windowscount {
+    color: #ffcc00;    /* Sayı ve ikon sarı/turuncu olacak */
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    background: transparent; /* Arka plan istemediğin için garantileyelim */
+}
