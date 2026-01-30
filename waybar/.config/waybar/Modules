@@ -465,4 +465,13 @@
     "format": "󱂬 {}", // İkonun yanındaki sayı pencere sayısını gösterir
     "tooltip": false
 },
+
+"custom/windowscount#2": {
+    "exec": "hyprctl activeworkspace -j | jq '.windows'",
+    "interval": 1,
+    "format": "󱂬 {}",
+    "tooltip": false,
+    "on-click": "hyprctl dispatch fullscreen 1"
+},
+
 }

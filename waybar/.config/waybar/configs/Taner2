@@ -98,6 +98,6 @@
    
 "modules-center": [
     "hyprland/workspaces#single",
-    "custom/windowscount"
+    "custom/windowscount#2"
 ],
 }],

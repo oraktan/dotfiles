@@ -1,0 +1,12 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "6f50636"
+hash = "407d19bc4fb46eff5fa8ff8337644847"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:zoom"
+rev = "6f50636"
+hash = "6ce49cf5b4c7c0d9cce8a1062ed478d3"
+
+[flavor]
+deps = []

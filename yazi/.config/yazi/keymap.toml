@@ -1,0 +1,22 @@
+[[manager.prepend_keymap]]
+on   = [ "g", "i" ]
+run  = "cd ~/Downloads"
+desc = "İndirilenler klasörüne git"
+
+
+[[mgr.prepend_keymap]]
+on   = "F"
+run  = "plugin smart-filter"
+desc = "Smart filter"
+
+
+# keymap.toml
+[[mgr.prepend_keymap]]
+on   = "+"
+run  = "plugin zoom 1"
+desc = "Zoom in hovered file"
+
+[[mgr.prepend_keymap]]
+on   = "-"
+run  = "plugin zoom -1"
+desc = "Zoom out hovered file"

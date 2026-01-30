@@ -1,0 +1,11 @@
+[plugin]
+prepend_previewers = [
+    # PDF için (Zaten pdftoppm yüklü, bu satırla netleştiriyoruz)
+    { name = "*.pdf", run = "pdf" },
+    # Word dosyaları için (Pandoc yüklüyse)
+    { name = "*.docx", run = "pandoc" },
+    # Excel dosyaları için (xlsx2csv yüklüyse)
+    { name = "*.xlsx", run = "xlsx2csv" },
+    # JSON/CSV gibi dosyalar için renkli ön izleme (Eğer eklentiyi indirdiyseniz)
+    { name = "*.json", run = "proactive" }
+]
