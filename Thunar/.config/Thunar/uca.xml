@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon></icon>
+	<name>Hepsini Pdf Yap</name>
+	<submenu></submenu>
+	<unique-id>1769756862757804-1</unique-id>
+	<command>bash ~/dotfiles/scripts/mergeAllpdf.sh %F</command>
+	<description>Seçili JPEG ve PDF dosyalarını tek PDF haline getirir</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>ghostwriter</icon>
+	<name>Terminalde aç </name>
+	<submenu></submenu>
+	<unique-id>1768573820250028-1</unique-id>
+	<command>ghostty --working-directory=%f</command>
+	<description>Ghostty ile açma</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<text-files/>
+</action>
+<action>
+	<icon>account-edit</icon>
+	<name>Copy File Name</name>
+	<submenu></submenu>
+	<unique-id>1768726473454798-1</unique-id>
+	<command>echo -n &quot;%F&quot; | xclip -selection clipboard</command>
+	<description>Copy File name </description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>3dchess</icon>
+	<name>WebM/WebP&apos;den JPEG&apos;e Dönüştür</name>
+	<submenu></submenu>
+	<unique-id>1768573977693570-2</unique-id>
+	<command>magick %f[0] -colorspace sRGB -quality 100 -density 300 %n_highres.jpg</command>
+	<description>Görseli JPEG formatına çevirir</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<image-files/>
+</action>
+<action>
+	<icon>add</icon>
+	<name>Copy Content</name>
+	<submenu></submenu>
+	<unique-id>1768726648995913-2</unique-id>
+	<command>cat &quot;%F&quot; | xclip -i -selection clipboard</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<text-files/>
+</action>
+<action>
+	<icon>checkbox</icon>
+	<name>Check sha1sum</name>
+	<submenu></submenu>
+	<unique-id>1526633271260079-26</unique-id>
+	<command>yad --info --title=&quot;Check sha1 for %n&quot; --text=&quot;$(sha1sum %f)&quot;</command>
+	<description>Check sha1sum</description>
+	<range></range>
+	<patterns>*.iso;*.ISO</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>Compare Files</name>
+	<submenu></submenu>
+	<unique-id>1768726746467021-3</unique-id>
+	<command>meld %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>checkbox</icon>
+	<name>Check sha256sum</name>
+	<submenu></submenu>
+	<unique-id>1577688162350307-1</unique-id>
+	<command>yad --info --title=&quot;Check sha256 for %n&quot; --text=&quot;$(sha256sum %f)&quot;</command>
+	<description>Check sha256sum</description>
+	<range></range>
+	<patterns>*.iso;*.ISO</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>checkbox</icon>
+	<name>Check md5sum</name>
+	<submenu></submenu>
+	<unique-id>1526736788575383-2</unique-id>
+	<command>yad --info --title=&quot;Check md5 for %n&quot; --text=&quot;$(md5sum %f)&quot;</command>
+	<description>Check md5sum</description>
+	<range></range>
+	<patterns>*.iso;*.ISO;*.tar.gz;*.TAR.GZ;*.zip;*.ZIP</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1703572977408169-1</unique-id>
+	<command>exo-open --working-directory %f --launch ghostty</command>
+	<description>Launch TerminalEmulator</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>audacious</icon>
+	<name>Add to audacious playlist</name>
+	<submenu></submenu>
+	<unique-id>1681893052016505-1</unique-id>
+	<command>audacious -e %U</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<audio-files/>
+</action>
+</actions>
