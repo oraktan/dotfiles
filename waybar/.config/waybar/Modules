@@ -137,7 +137,12 @@
     "on-click": "gsimplecal",
     "tooltip": false 
 },
-
+"clock#11": {
+    "format": "  {:%H:%M}",
+    "format-alt": "󰃭  {:%d/%m/%Y}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "on-click": "yad --calendar --columns=1 --width=250 --height=200 --undecorated --fixed --close-on-unfocus --no-buttons --posx=1600 --posy=40"
+},
 "clock#6": {
     "interval": 1,
     "format": " {:%H:%M:%S}",
@@ -187,6 +192,14 @@
     "tooltip": true,
     "on-click": "korganizer" 
 },
+
+
+"clock#13": {
+  "format": "󰃭 {:%d %b %H:%M}",
+  "tooltip-format": "{:%Y %B}",
+  "on-click": "gnome-calendar"
+},
+/* Saatlerin Bölümü sonu */
 
 "cpu": {
 	"format": "{usage}% 󰍛",
