@@ -1,48 +1,96 @@
-/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
-/* Main Config - For Keybinds generation */
+* {
+    /* Renk Paleti - Biraz daha canlı ve kontrastlı */
+    bg:          #0f111a;
+    bg-alt:      #151820;
+    bg-soft:     #1a1d2a;
+    fg:          #cdd6f4;
+    fg-dim:      #7f849c;
+    accent:      #89b4fa;
+    accent-soft: #6c7dd6;
+    urgent:      #f38ba8;
 
-@import "~/.config/rofi/config.rasi"  
+    selected-bg: #23263a;
+    selected-fg: #89b4fa; /* Metin rengini de accent yaptık */
 
-
-/* ---- Mainbox ---- */
-mainbox {
-  children:
-    [ "inputbar", "message", "listview"];
-}
-
-/* ---- Entry ---- */
-entry {
-  expand: true;
-  placeholder: " 🧮 Search Keybinds";
-}
-
-/* ---- Listview ---- */
-listview {
-  columns: 2;
-  lines: 8;
-  fixed-height: false;
-  scrollbar: true;
-  spacing: 6px;
-  cycle: true;
+    border-color: #2a2f4a;
+    font: "JetBrainsMono Nerd Font Medium 11";
 }
 
 window {
-  width: 90%;
-  height: inherit;
+    width:            600px; /* Sabit genişlik daha profesyonel durur */
+    location:         center;
+    anchor:           center;
+    border:           2px;
+    border-color:     @accent; /* İnce bir çerçeve hattı */
+    background-color: @bg;
+    border-radius:    16px;
+    padding:          0px; /* İç paddingi mainbox halledecek */
 }
 
-/* ---- Elements ---- */
+mainbox {
+    padding:          20px;
+    spacing:          15px;
+    children:         [ inputbar, listview ];
+    background-color: transparent;
+}
+
+/* ---- Arama Çubuğu ---- */
+inputbar {
+    background-color: @bg-soft;
+    border:           1px;
+    border-color:     @border-color;
+    border-radius:    12px;
+    padding:          12px 16px;
+    spacing:          10px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color:       @accent;
+    font:             "JetBrainsMono Nerd Font Bold 12";
+}
+
+entry {
+    text-color:       @fg;
+    placeholder:      "Sistemde ara...";
+    placeholder-color: @fg-dim;
+}
+
+/* ---- Liste Görünümü ---- */
+listview {
+    lines:            8;
+    columns:          1;
+    fixed-height:     false;
+    spacing:          8px;
+    scrollbar:        false; /* Scrollbar'ı gizlemek daha temiz bir görünüm sağlar */
+    background-color: transparent;
+}
+
+/* ---- Elemanlar ---- */
 element {
-  orientation: horizontal;
+    padding:          10px 15px;
+    border-radius:    10px;
+    background-color: transparent;
+    text-color:       @fg;
+    cursor:           pointer;
 }
 
-element-icon {
-  	size: 0%;
+/* Seçili eleman için özel efekt */
+element selected {
+    background-color: @selected-bg;
+    text-color:       @selected-fg;
+    border:           0px 0px 0px 4px; /* Sol tarafa kalın bir çizgi */
+    border-color:     @accent;
 }
 
 element-text {
-    horizontal-align: 0.0;
-    vertical-align: 0.5;
-    margin: 0px;
-    padding: 0px;
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
+
+element-icon {
+    size:             24px;
+    padding:          0 10px 0 0;
+    background-color: transparent;
 }
