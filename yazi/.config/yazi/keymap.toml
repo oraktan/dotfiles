@@ -1,22 +1,77 @@
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "i" ]
 run  = "cd ~/Downloads"
 desc = "İndirilenler klasörüne git"
 
+[[mgr.prepend_keymap]]
+on   = [ "g", "p" ]
+run  = "cd ~/Pictures"
+desc = "Fotoğraflar klasörüne git"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "c" ]
+run  = "cd ~/.config"
+desc = "Config klasörüne git"
+
+[[mgr.prepend_keymap]]
+on   = ["A"]
+run  = "create --dir"
+desc = "Yeni klasör oluştur"
+
+[[mgr.prepend_keymap]]
+on  = "S"
+run = "shell --tty ncdu"
+desc = "Open ncdu"
 
 [[mgr.prepend_keymap]]
 on   = "F"
 run  = "plugin smart-filter"
 desc = "Smart filter"
 
-
-# keymap.toml
-[[mgr.prepend_keymap]]
-on   = "+"
-run  = "plugin zoom 1"
-desc = "Zoom in hovered file"
+# --- Sıralama Ayarları ---
 
 [[mgr.prepend_keymap]]
-on   = "-"
-run  = "plugin zoom -1"
-desc = "Zoom out hovered file"
+on = "s"
+run = "noop"
+desc = "Sıralama menüsü başlatıcı"
+
+[[mgr.prepend_keymap]]
+on  = [ "s", "n" ]
+run = "sort natural --reverse=no"
+desc = "İsme göre (A-Z)"
+
+[[mgr.prepend_keymap]]
+on  = [ "s", "N" ]
+run = "sort natural --reverse=yes"
+desc = "İsme göre (Z-A)"
+
+[[mgr.prepend_keymap]]
+on  = [ "s", "s" ]
+run = "sort size --reverse=no"
+desc = "Boyuta göre (Küçük > Büyük)"
+
+[[mgr.prepend_keymap]]
+on  = [ "s", "S" ]
+run = "sort size --reverse=yes"
+desc = "Boyuta göre (Büyük > Küçük)"
+
+[[mgr.prepend_keymap]]
+on  = [ "s", "m" ]
+run = "sort mtime --reverse=no"
+desc = "Tarihe göre (Eski > Yeni)"
+
+[[mgr.prepend_keymap]]
+on  = [ "s", "M" ]
+run = "sort mtime --reverse=yes"
+desc = "Tarihe göre (Yeni > Eski)"
+
+[[mgr.prepend_keymap]]
+on  = [ "s", "d" ]
+run = "sort --dir-first"
+desc = "Klasörleri başa al"
+
+
+[[mgr.prepend_keymap]]
+on  = [ "s", "D" ]
+run = "sort --dir-first=no"
+desc = "Klasörleri normal sıraya sok (Karışık)"

@@ -86,3 +86,48 @@ git clone https://github.com/JaKooLit/Fedora-Hyprland.git
 cd Fedora-Hyprland/
 chmod +x install.sh
 ./install.sh
+yazi
+yazi
+yazi --debug
+cd .config/yazi/
+rm -rf yazi.toml 
+mkdir -p ~/.config/yazi/flavors
+pwd
+vim yazi.toml
+ya pack -a yazi-rs/flavors:catppuccin-mocha
+mkdir -p ~/.config/yazi/flavors/catppuccin-mocha.yazi
+curl -L https://raw.githubusercontent.com/yazi-rs/flavors/main/catppuccin-mocha.yazi/flavor.toml -o ~/.config/yazi/flavors/catppuccin-mocha.yazi/flavor.toml
+cd flavors/catppuccin-mocha.yazi/
+pwd
+ll
+pwd
+ls -la
+vim flavor.toml 
+cd ..
+cd .
+cd ..
+vim yazi.toml 
+echo '[theme]
+use = "catppuccin-mocha"' > ~/.config/yazi/yazi.toml
+vim yazi.toml 
+yazi --debug
+vim theme.toml
+yazi --debug | grep theme.toml
+yazi --debug 
+vim yazi.toml 
+vim theme.toml 
+COLORTERM=truecolor yazi
+COLORTERM=gryvbox yazi
+yazi
+pwd
+cd
+spf -c
+spf --help
+spf --help | grep config
+spf pl
+vim .config/superfile/config.toml 
+spf
+cd .config/superfile/
+spf
+yazi
+vim hotkeys.toml 

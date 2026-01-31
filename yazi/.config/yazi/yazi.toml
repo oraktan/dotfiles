@@ -1,11 +1,20 @@
-[plugin]
-prepend_previewers = [
-    # PDF için (Zaten pdftoppm yüklü, bu satırla netleştiriyoruz)
-    { name = "*.pdf", run = "pdf" },
-    # Word dosyaları için (Pandoc yüklüyse)
-    { name = "*.docx", run = "pandoc" },
-    # Excel dosyaları için (xlsx2csv yüklüyse)
-    { name = "*.xlsx", run = "xlsx2csv" },
-    # JSON/CSV gibi dosyalar için renkli ön izleme (Eğer eklentiyi indirdiyseniz)
-    { name = "*.json", run = "proactive" }
-]
+[mgr]
+show_hidden = false
+linemode = "mtime"
+sort_by      = "mtime"     # "name", "size", "mtime", "extension" gibi
+sort_sensitive = false     # Büyük/küçük harf duyarlılığı
+sort_reverse   = true      # Büyükten küçüğe (descending) için true
+sort_dir_first = true      # Klasörleri her zaman en üstte göster
+
+name = "name"
+display = "name"
+
+[[mgr.append_columns]]
+name = "mtime"
+display = "mtime"
+format = "%Y-%m-%d %H:%M"  # Tarih formatı (Yıl-Ay-Gün Saat:Dakika)
+
+[[mgr.append_columns]]
+name = "size"
+display = "size"
+
