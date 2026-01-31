@@ -20,6 +20,15 @@ export ZSH="$ZDOTDIR/oh-my-zsh"
 #[[ -f $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh ]] && source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 [[ -f $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+# Eklentiyi yükle
+[[ -f $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]] && source $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+# fzf'in kendi tuş kombinasyonlarını ve tamamlamasını yükle
+# Not: Ghostty kullanırken bu yollar sistemine göre değişebilir
+[[ -f /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
+[[ -f /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
+# Ok tuşlarını aramaya ata (Bu kısım çalışması için şarttır)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 # 7. Zoxide
 eval "$(zoxide init zsh)"
+eval "$(atuin init zsh)"
