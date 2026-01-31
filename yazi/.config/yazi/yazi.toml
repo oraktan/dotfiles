@@ -18,3 +18,9 @@ format = "%Y-%m-%d %H:%M"  # Tarih formatı (Yıl-Ay-Gün Saat:Dakika)
 name = "size"
 display = "size"
 
+[plugin]
+prepend_previewers = [
+    { name = "*.xlsx", run = "xlsx-preview" },
+    { name = "*.xls", run = "xlsx-preview" },
+    { mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", run = "xlsx-preview" }
+]
