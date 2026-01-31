@@ -1,0 +1,53 @@
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias ls="ls -CF --color=auto"
+alias fhere="find . | grep -i"
+alias psg="ps aux | grep -v grep | grep  -e PID -e"
+alias myip="curl http://ipecho.net/plain; echo"
+alias top="htop"
+alias dir="ls -alh --color=auto"
+alias ports='netstat -tulanp'
+alias baglan='ssh root@centos1'
+alias explore='nautilus .'
+alias iceaktar='source ~/.bashrc'
+alias edit='vim ~/.alias'
+alias !!='sudo !!'
+alias wifioff='rfkill block wifi'
+alias wifion='rfkill unblock wifi'
+alias wifires='rfkill block wifi && rfkill unblock wifi'
+alias mp3indir='youtube-dl --extract-audio --audio-format mp3'
+alias c='chmod +x'
+alias pid='pgrep -u monster'
+alias indir='sudo apt install -y'
+alias grestart='gnome-shell --replace'
+alias maxdosya='find /home -type f -exec du -h {} + 2>/dev/null | sort -rh | head -n'
+alias mkdir='mkdir -pv'
+alias maxdosya='find . -type f -exec du -h {} + 2>/dev/null | sort -rh | head -n'
+alias ramizle='watch -n 1 "free -m | awk '\''{print \$3}'\''"'
+alias nedir='cat /etc/os-release'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+
+alias home='cd ~'
+alias desktop='cd ~/Desktop'
+alias downloads='cd ~/Downloads'
+
+alias duh='du -h --max-depth=1'
+alias empty-trash='rm -rf ~/.local/share/Trash/*'
+alias untar='tar -zxvf'
+alias tree='tree -C'
+alias pyserve='python3 -m http.server'
+alias catx='batcat'
+alias gitc='git clone https://www.github.com/'
+alias mkcd='func(){ mkdir -p "$1" && cd "$1"; }; func'
+
+alias fif='grep -iR'
+alias vim='nvim'
+alias yy='wy-copy'
+alias pp='xclip -selection clipboard -o'
+
