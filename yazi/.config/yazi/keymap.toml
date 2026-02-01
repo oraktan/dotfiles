@@ -75,3 +75,15 @@ desc = "Klasörleri başa al"
 on  = [ "s", "D" ]
 run = "sort --dir-first=no"
 desc = "Klasörleri normal sıraya sok (Karışık)"
+
+[[mgr.prepend_keymap]]
+on   = ["g", "s"]
+run  = '''
+	shell '
+		files=("$@")
+		count=${#files[@]}
+		size=$(du -sch "$@" | tail -n 1 | awk "{print \$1}")
+		notify-send "Seçim Bilgisi" "Seçili dosya: $count\nToplam boyut: $size"
+	' --confirm
+'''
+desc = "Seçili dosya sayısı ve toplam boyutunu göster"
