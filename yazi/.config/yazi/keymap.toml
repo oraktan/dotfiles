@@ -87,3 +87,9 @@ run  = '''
 	' --confirm
 '''
 desc = "Seçili dosya sayısı ve toplam boyutunu göster"
+
+
+[[mgr.prepend_keymap]]
+on   = [ "e" ]
+run  = 'shell --block "nvim \"$@\""'
+desc = "Edit with Neovim"
