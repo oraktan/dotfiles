@@ -1,47 +1,66 @@
 # --- 1. P10K INSTANT PROMPT ---
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+# Performans için quiet modunda kalması iyidir
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # --- 2. YOLLAR VE DEĞİŞKENLER ---
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH="$HOME/.oh-my-zsh"
-export HISTFILE=~/.zsh_history
+# Eğer stow ile bağladıysan burası standart kalsın, 
+# ama dosyalar hala dotfiles içindeyse tam yolu buraya yazabilirsin.
+export ZSH="$HOME/dotfiles/oh-my-zsh/.config/oh-my-zsh"
+export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-# --- 3. POWERLEVEL10K & TEMA ---
-[[ -f $ZDOTDIR/.p10k.zsh ]] && source $ZDOTDIR/.p10k.zsh
-source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+# --- 3. OH MY ZSH AYARLARI ---
+# Tema değişkeni burada tanımlanır, altta source edilir
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# --- 4. OH MY ZSH AYARLARI ---
-plugins=(git dnf zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search)
-source $ZSH/oh-my-zsh.sh
+# Eklentiler (Custom klasörüne indirdiğin eklentiler burada listelenir)
+plugins=(
+    git 
+    dnf 
+    zsh-autosuggestions 
+    zsh-syntax-highlighting 
+    zsh-history-substring-search
+)
+
+# Oh My Zsh'i başlat (Bu satır eklentileri ve temayı otomatik yükler)
+if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
+    source "$ZSH/oh-my-zsh.sh"
+else
+    echo "Hata: Oh My Zsh $ZSH dizininde bulunamadı!"
+fi
+
+# --- 4. POWERLEVEL10K CONFIG ---
+# P10k ayarlarını OMZ yüklendikten sonra yüklemek daha sağlıklıdır
+[[ -f $ZDOTDIR/.p10k.zsh ]] && source $ZDOTDIR/.p10k.zsh
 
 # --- 5. EKLENTİLER & ARAÇLAR ---
-# FZF (CTRL+R vb. için)
-source <(fzf --zsh)
+# FZF (Kuruluysa çalıştır)
+if command -v fzf &> /dev/null; then
+    source <(fzf --zsh)
+fi
 
-# Zoxide (Hızlı dizin geçişi)
+# Zoxide
 command -v zoxide &> /dev/null && eval "$(zoxide init zsh)"
 
-# --- 6. ALIASLAR (lsd ve diğerleri) ---
+# --- 6. ALIASLAR ---
 [[ -f $ZDOTDIR/.alias ]] && source $ZDOTDIR/.alias
 alias ls='lsd'
 alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
-alias cat='bat' # Eğer 'bat' kuruluysa çok iyidir
+alias cat='bat'
 
-# --- 7. GÖRSEL BAŞLANGIÇ (Terminal açıldığında) ---
-# Pokemon scriptini istersen buraya ekleyebilirsin:
-# pokemon-colorscripts --no-title -s -r
-fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
+# --- 7. GÖRSEL BAŞLANGIÇ ---
+# Hata almamak için dosya kontrolü eklendi
+if [[ -f "$HOME/.config/fastfetch/config-compact.jsonc" ]]; then
+    fastfetch -c "$HOME/.config/fastfetch/config-compact.jsonc"
+fi
 
 # --- 8. DİĞER AYARLAR ---
 setopt appendhistory
 DISABLE_AUTO_TITLE="true"
-
