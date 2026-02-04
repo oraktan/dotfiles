@@ -55,11 +55,15 @@ alias lla='ls -la'
 alias lt='ls --tree'
 alias cat='bat'
 
-# --- 7. GÖRSEL BAŞLANGIÇ ---
-# Hata almamak için dosya kontrolü eklendi
+
+
+
+# --- FASTFETCH AYARI ---
 if [[ -f "$HOME/.config/fastfetch/config-compact.jsonc" ]]; then
-    fastfetch -c "$HOME/.config/fastfetch/config-compact.jsonc"
+    # --logo-type kitty veya --logo-type chafa ekleyerek görseli zorlayabiliriz
+    fastfetch -c "$HOME/.config/fastfetch/config-compact.jsonc" --logo "$HOME/.config/fastfetch/fedora.png" --logo-width 22 --logo-height 12
 fi
+
 
 # --- 8. DİĞER AYARLAR ---
 setopt appendhistory
