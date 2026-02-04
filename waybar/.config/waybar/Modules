@@ -198,6 +198,7 @@
   "format": "󰃭 {:%d %b %H:%M}",
   "tooltip-format": "{:%Y %B}",
   "on-click": "gnome-calendar"
+  "interval": 60
 },
 /* Saatlerin Bölümü sonu */
 
