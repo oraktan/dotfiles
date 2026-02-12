@@ -50,4 +50,4 @@ alias fif='grep -iR'
 alias vim='nvim'
 alias yy='wy-copy'
 alias pp='xclip -selection clipboard -o'
-
+alias localsend='flatpak run org.localsend.localsend_app'
