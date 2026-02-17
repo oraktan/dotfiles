@@ -67,3 +67,20 @@ yy() {
 
 alias duf='du -sh * 2>/dev/null | sort -h'
 
+# Not ekleme fonksiyonu (Tarih damgalı)
+n() {
+    local NOT_DOSYASI="$HOME/dotfiles/not/.config/notlarim/notlarim.txt"
+    
+    # Eğer n yazıp yanına bir şey yazmazsan sadece notları gösterir
+    if [ -z "$1" ]; then
+        echo "--- Mevcut Notların ---"
+        cat "$NOT_DOSYASI"
+    else
+        # Tarih formatı: [17-02-2026 17:15]
+        local TARIH=$(date '+[%d-%m-%Y %H:%M]')
+        echo "$TARIH $*" >> "$NOT_DOSYASI"
+        echo "Not eklendi: $*"
+    fi
+}
+
+
