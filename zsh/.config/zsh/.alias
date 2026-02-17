@@ -48,6 +48,19 @@ alias mkcd='func(){ mkdir -p "$1" && cd "$1"; }; func'
 
 alias fif='grep -iR'
 alias vim='nvim'
-alias yy='wy-copy'
+#alias yy='wl-copy'
 alias pp='xclip -selection clipboard -o'
-
+#alias yy='bash -c "cat \"\$1\" | wl-copy" --'
+# yy fonksiyonu: Dosya içeriğini kopyalar
+yy() {
+    if [ -n "$1" ]; then
+        if [ -f "$1" ]; then
+            cat "$1" | wl-copy
+            echo "✅ '$1' panoya kopyalandı."
+        else
+            echo "❌ Hata: '$1' bir dosya değil."
+        fi
+    else
+        echo "💡 Kullanım: yy dosya_adı"
+    fi
+}

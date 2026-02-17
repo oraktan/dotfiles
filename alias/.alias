@@ -48,6 +48,7 @@ alias mkcd='func(){ mkdir -p "$1" && cd "$1"; }; func'
 
 alias fif='grep -iR'
 alias vim='nvim'
-alias yy='wy-copy'
+alias yy='wl-copy'
 alias pp='xclip -selection clipboard -o'
 alias localsend='flatpak run org.localsend.localsend_app'
+
