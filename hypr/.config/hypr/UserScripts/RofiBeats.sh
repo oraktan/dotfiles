@@ -53,6 +53,7 @@ play_local_music() {
     if [ "${filenames[$i]}" = "$choice" ]; then
       music_playing && stop_music
       notification "Now Playing:" "$choice"
+      # Local dosyalarda sorun yok, orijinal haliyle devam
       mpv --no-video --playlist-start="$i" --loop-playlist "${local_music[@]}"
       break
     fi
@@ -82,7 +83,9 @@ play_online_music() {
   }
   music_playing && stop_music
   notification "Now Playing:" "$choice"
-  mpv --no-video --shuffle "$link"
+  
+  # DÜZELTİLDİ: --shuffle kaldırıldı, işlemciyi yormaması için cache ayarları eklendi.
+  mpv --no-video --cache=yes --demuxer-max-bytes=500KiB --demuxer-readahead-secs=5 "$link"
 }
 
 # Manage online music list (add, remove, view)
