@@ -64,3 +64,6 @@ yy() {
         echo "💡 Kullanım: yy dosya_adı"
     fi
 }
+
+alias duf='du -sh * 2>/dev/null | sort -h'
+

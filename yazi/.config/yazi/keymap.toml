@@ -98,3 +98,16 @@ desc = "Seçili dosya sayısı ve toplam boyutunu göster"
 on   = [ "e" ]
 run  = 'shell --block "nvim \"$@\""'
 desc = "Edit with Neovim"
+
+
+
+[[mgr.prepend_keymap]]
+on   = [ "i" ]
+run  = 'shell --block "ls -lh \"$1\" && echo \"\" && stat \"$1\" && read -n 1"'
+desc = "Dosya detaylarını göster (stat)"
+
+
+[[mgr.prepend_keymap]]
+on   = [ "M" ]
+run  = 'shell "bash ~/dotfiles/scripts/scripts/mergeAllpdf.sh \"$@\"" --confirm'
+desc = "Bulunulan dizindeki PDF'leri birleştir (Merge PDF)"
