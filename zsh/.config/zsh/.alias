@@ -83,4 +83,23 @@ n() {
     fi
 }
 
+# Pictures klasörüne git
+alias gp='cd ~/Pictures'
+
+# Downloads klasörüne git
+alias gd='cd ~/Downloads'
+
+# Notlar klasörüne git (Buradaki yolu kendine göre düzenle)
+alias gn='cd ~/.config/notlarim'
+
+# Dotfiles otomatik güncelleme fonksiyonu
+gitu() {
+    # Eğer bir mesaj girilirse onu kullan, girilmezse varsayılan mesajı atar
+    local msg="${1:-dotfiles güncellendi: $(date +'%Y-%m-%d %H:%M')}"
+    
+    git add .
+    git commit -m "$msg"
+    git push origin main
+}
+
 
