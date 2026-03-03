@@ -75,3 +75,5 @@ setopt appendhistory
 DISABLE_AUTO_TITLE="true"
 source /home/thinkpad/dotfiles/oh-my-zsh/.config/oh-my-zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 export ZSH_CUSTOM="$HOME/dotfiles/oh-my-zsh/.config/oh-my-zsh"
+export PATH="$HOME/.local/bin:$PATH"
+

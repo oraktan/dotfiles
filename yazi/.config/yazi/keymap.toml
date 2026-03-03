@@ -3,6 +3,12 @@ on   = [ "g", "i" ]
 run  = "cd ~/Downloads"
 desc = "İndirilenler klasörüne git"
 
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "t" ]
+run  = "cd ~/Documents"
+desc = "Documents klasörüne gider"
+
 [[mgr.prepend_keymap]]
 on   = [ "g", "p" ]
 run  = "cd ~/Pictures"

@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
+	<icon></icon>
+	<name>Merge All PDf</name>
+	<submenu></submenu>
+	<unique-id>1772457459305938-1</unique-id>
+	<command>/home/thinkpad/dotfiles/scripts/scripts/mergeAllpdf.sh %F</command>
+	<description>Merge All</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
 	<icon>audacious</icon>
 	<name>Add to audacious playlist</name>
 	<submenu></submenu>
