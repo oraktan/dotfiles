@@ -1,47 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 
-# Değişkenler
+# Variables
 rofi_theme="$HOME/.config/rofi/config-emoji.rasi"
-cache_file="$HOME/.cache/rofi_emoji_history"
-msg='** note ** 👀 Seçince otomatik yapıştırır'
+msg='** note ** 👀 Click or Return to choose || Ctrl V to Paste'
 
-# Dosyaları hazırla
-touch "$cache_file"
-
-# Rofi açıksa kapat
-pidof rofi > /dev/null && pkill rofi
-
-# 1. DATA kısmını bul ve emojileri çek (Hata payını sıfıra indirdik)
-ALL_EMOJIS=$(awk '/^# # DATA # #$/ {p=1; next} p' "$0")
-
-# 2. Frekans Takibi: Geçmişteki en popülerleri başa al
-if [ -s "$cache_file" ]; then
-    # Geçmişi say, en çok kullanılanları bul
-    TOP_EMOJIS=$(sort "$cache_file" | uniq -c | sort -rn | awk '{print $2}')
-    # Listeyi birleştir ve mükerrerleri (tekrarları) sil
-    FINAL_LIST=$(echo -e "${TOP_EMOJIS}\n${ALL_EMOJIS}" | awk '!x[$1]++')
-else
-    FINAL_LIST="$ALL_EMOJIS"
+# Check if rofi is already running
+if pidof rofi > /dev/null; then
+  pkill rofi
 fi
 
-# 3. Rofi Menüsünü Aç
-SELECTED=$(echo "$FINAL_LIST" | rofi -i -dmenu -mesg "$msg" -config "$rofi_theme" | awk '{print $1}')
-
-# Eğer seçim yapılmadıysa çık
-[ -z "$SELECTED" ] && exit
-
-# 4. Seçimi kaydet ve yapıştır
-echo "$SELECTED" >> "$cache_file"
-echo -n "$SELECTED" | wl-copy
-sleep 0.1
-wtype -M ctrl v -m ctrl
+sed '1,/^# # DATA # #$/d' "$0" | \
+rofi -i -dmenu -mesg "$msg" -config $rofi_theme | \
+awk '{print $1}' | \
+head -n 1 | \
+tr -d '\n' | \
+wl-copy
 
 exit
 
 # # DATA # #
-# (BURADAN AŞAĞIYA SENDEKİ O UZUN LİSTEYİ OLDUĞU GİBİ BIRAK)
-#
-😀😞 grinning face face smile happy joy :D grin
+😀 grinning face face smile happy joy :D grin
 😃 grinning face with big eyes face happy joy haha :D :) smile funny
 😄 grinning face with smiling eyes face happy joy funny haha laugh like :D :) smile
 😁 beaming face with smiling eyes face happy smile joy kawaii
