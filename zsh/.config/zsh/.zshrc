@@ -31,7 +31,8 @@ export SAVEHIST=10000
 # 4. OH MY ZSH AYARLARI
 # =====================================================
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
+export ZSH_CUSTOM=~/.config/oh-my-zsh
+#export ZSH_CUSTOM="$HOME/dotfiles/oh-my-zsh/.config/oh-my-zsh"
 plugins=(
   git
   dnf
@@ -74,6 +75,5 @@ alias cat='bat'
 setopt appendhistory
 DISABLE_AUTO_TITLE="true"
 source ~/dotfiles/oh-my-zsh/.config/oh-my-zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
-export ZSH_CUSTOM="$HOME/dotfiles/oh-my-zsh/.config/oh-my-zsh"
 export PATH="$HOME/.local/bin:$PATH"
-
+# Oh My Zsh ana dosyası (Senin sistemindeki yoluna göre)
