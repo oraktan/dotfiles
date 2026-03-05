@@ -39,6 +39,11 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-history-substring-search
+  sudo
+  z
+  extract
+  fzf
+  common-aliases
 )
 
 # Oh My Zsh yükleniyor
