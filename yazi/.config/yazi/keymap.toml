@@ -117,3 +117,8 @@ desc = "Dosya detaylarını göster (stat)"
 on   = [ "M" ]
 run  = 'shell "bash ~/dotfiles/scripts/scripts/mergeAllpdf.sh \"$@\"" --confirm'
 desc = "Bulunulan dizindeki PDF'leri birleştir (Merge PDF)"
+
+[[mgr.prepend_keymap]]
+on = ["g", "a"]
+run = 'ghostty -e sh -c "cd \"$PWD\"; exec $SHELL"'
+desc = "Open directory in Ghostty"

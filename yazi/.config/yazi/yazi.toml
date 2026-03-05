@@ -24,3 +24,7 @@ prepend_previewers = [
     { name = "*.xls", run = "xlsx-preview" },
     { mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", run = "xlsx-preview" }
 ]
+[opener]
+ghostty = [
+  { run = 'ghostty -e "$SHELL" -c "cd \"$1\"; exec $SHELL"', desc = "Open with Ghostty", block = false }
+]

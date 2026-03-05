@@ -21,3 +21,10 @@
 
 
 @theme "~/.config/rofi/themes/KooL_style-4.rasi"
+@theme "~/.config/rofi/themes/KooL_style-14.rasi"
+@theme "~/.config/rofi/themes/KooL_style-13-Vertical.rasi"
+@theme "~/.config/rofi/themes/KooL_style-12-TOP-Docu.rasi"
+@theme "~/.config/rofi/themes/KooL_style-11-Win11-list-light.rasi"
+@theme "~/.config/rofi/themes/KooL_style-11-Win11-list-dark.rasi"
+@theme "~/.config/rofi/themes/KooL_style-10-Fancy-v2.rasi"
+@theme "~/.config/rofi/themes/KooL_style-10-Fancy.rasi"

@@ -1,32 +1,45 @@
 #!/usr/bin/env bash
-
 set -e
 
+# Çıktı adı
 TARIH=$(date +"%Y-%m-%d_%H-%M-%S")
-FINAL_PDF="secili_dosyalar_$TARIH.pdf"
+FINAL_PDF="birlesik_$TARIH.pdf"
 
-JPEG_LIST=()
-PDF_LIST=()
+# Listeleri tanımla
+G_LIST=()
+P_LIST=()
 
+# Dosyaları tara
 for FILE in "$@"; do
-  case "${FILE,,}" in
-    *.jpg|*.jpeg)
-      JPEG_LIST+=("$FILE")
-      ;;
-    *.pdf)
-      PDF_LIST+=("$FILE")
-      ;;
-  esac
+    if [[ -f "$FILE" ]]; then
+        EXT="${FILE##*.}"
+        EXT_LOWER=$(echo "$EXT" | tr '[:upper:]' '[:lower:]')
+        
+        case "$EXT_LOWER" in
+            jpg|jpeg|png|webp)
+                G_LIST+=("$FILE")
+                ;;
+            pdf)
+                P_LIST+=("$FILE")
+                ;;
+        esac
+    fi
 done
 
-# JPEG varsa PDF'e çevir
-if [ ${#JPEG_LIST[@]} -gt 0 ]; then
-  IMG_PDF="$(dirname "${JPEG_LIST[0]}")/fotograflar_tmp_$TARIH.pdf"
-  img2pdf "${JPEG_LIST[@]}" -o "$IMG_PDF"
-  PDF_LIST+=("$IMG_PDF")
+# Görselleri PDF'e çevir
+TMP_IMG=""
+if [ ${#G_LIST[@]} -gt 0 ]; then
+    TMP_IMG="tmp_imgs_$TARIH.pdf"
+    img2pdf "${G_LIST[@]}" -o "$TMP_IMG"
+    P_LIST+=("$TMP_IMG")
 fi
 
-# PDF'leri birleştir
-if [ ${#PDF_LIST[@]} -gt 0 ]; then
-  pdfunite "${PDF_LIST[@]}" "$FINAL_PDF"
+# Birleştir
+if [ ${#P_LIST[@]} -gt 0 ]; then
+    pdfunite "${P_LIST[@]}" "$FINAL_PDF"
+    [ -f "$TMP_IMG" ] && rm "$TMP_IMG"
+    echo "✔️ Başarılı: $FINAL_PDF"
+else
+    echo "❌ Hata: Uygun dosya seçilmedi."
+    exit 1
 fi
