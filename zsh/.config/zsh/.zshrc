@@ -21,8 +21,8 @@ fi
 # 3. ORTAM DEĞİŞKENLERİ
 # =====================================================
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH="$HOME/dotfiles/oh-my-zsh/.config/oh-my-zsh"
-
+#export ZSH="$HOME/dotfiles/oh-my-zsh/.config/oh-my-zsh"
+export ZSH="$HOME/.config/oh-my-zsh"
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
