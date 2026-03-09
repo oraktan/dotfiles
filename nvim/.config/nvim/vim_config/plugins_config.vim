@@ -13,5 +13,7 @@ Plug 'jiangmiao/auto-pairs'           " Parantez eşleştirme
 Plug 'tpope/vim-commentary'           " Yorum satırı ekleme
 Plug 'Yggdroot/indentLine'            " Girinti çizgileri
 Plug 'morhetz/gruvbox'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 call plug#end()
 

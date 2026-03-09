@@ -27,3 +27,10 @@ nnoremap <leader>2 `2
 nnoremap <leader>3 `3
 nnoremap <leader>4 `4
 nnoremap <leader>5 `5
+" Boşluk tuşunu (Leader) ayarla
+let mapleader = " "
+
+" İstediğin Telescope kısayolları (Vimscript formatı)
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fm <cmd>Telescope marks<cr>
