@@ -16,7 +16,7 @@ Plug 'jiangmiao/auto-pairs'
 " FZF (Fedora'da 'sudo dnf install fzf' yaptıysan en temizi budur)
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-
+Plug 'chentoast/marks.nvim'
 call plug#end()
 
 
@@ -42,3 +42,17 @@ augroup remember_cursor
     autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
+" Renk tanımlarını Vim tarafında yapalım (Daha güvenlidir)
+highlight MarkLineHL guibg=#fabd2f guifg=#282828 ctermbg=214 ctermfg=235
+highlight MarkSignHL guifg=#fabd2f gui=bold ctermfg=214 cterm=bold
+"
+"lua << EOF
+"require'marks'.setup({
+"  default_mappings = true,
+"  refresh_interval = 250,
+"  highlight_group = "MarkLineHL", -- Satırı fosforlu yapacak olan grup
+"  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+"})
+"EOF
+"" init.vim dosyanın EN ALTINA yapıştır:
+"

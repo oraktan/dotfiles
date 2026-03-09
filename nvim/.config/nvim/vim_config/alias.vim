@@ -19,6 +19,8 @@ nnoremap <leader>f :echo expand('%:p')<CR>
 nnoremap <leader>h :echo join(readfile(expand('~/dotfiles/nvim/.config/nvim/.vim_config/alias.vim')), "\n")<CR>
 " Boşluk + w basınca kaydetsin
 nnoremap <leader>w :w<CR>
+
+nnoremap <leader>q :q<CR>
 " Boşluk + 1 basınca oraya ışınlan (Ters tırnakla uğraşma)
 nnoremap <leader>1 `1
 nnoremap <leader>2 `2
