@@ -9,9 +9,7 @@ pidof rofi >/dev/null && pkill rofi
 
 # ---- files --------------------------------------------------
 CONF_FILES=(
-  "$HOME/.config/hypr/configs/Keybinds.conf"
-  "$HOME/.config/hypr/UserConfigs/UserKeybinds.conf"
-  "$HOME/.config/hypr/UserConfigs/Laptops.conf"
+  "$HOME/.config/hypr/Keybinds.conf"
 )
 
 ROFI_THEME="$HOME/.config/rofi/config-keybinds.rasi"
