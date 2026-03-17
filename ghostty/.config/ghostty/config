@@ -10,7 +10,7 @@ cursor-style = block
 cursor-style-blink = false
 
 # clipboard
-copy-on-select = clipboard 
+#copy-on-select = clipboard 
 clipboard-write = allow
 clipboard-read = allow
 clipboard-trim-trailing-spaces = true
