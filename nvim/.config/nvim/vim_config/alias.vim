@@ -34,3 +34,9 @@ let mapleader = " "
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fm <cmd>Telescope marks<cr>
+" Delete tuşu panoyu bozmadan siler
+"" Önce Boşluk tuşunu Leader olarak tanımlayalım (isteğe bağlı ama önerilir)
+let mapleader = " "
+
+" Boşluk + x tuşuna basınca panoyu bozmadan tüm dosyayı siler
+nnoremap <leader>x :%d _<CR>
