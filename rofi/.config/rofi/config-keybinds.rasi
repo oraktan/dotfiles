@@ -12,6 +12,7 @@
 
 window {
     width:            1000px; /* Genişliği iyice artırdık ki açıklamalar sığsın */
+    height:           600px;
     location:         center;
     anchor:           center;
     border:           2px;
@@ -54,11 +55,11 @@ entry {
 
 /* ---- Liste Görünümü (Tek Sütun, Tam Genişlik) ---- */
 listview {
-    lines:            8;
+    lines:            15;
     columns:          1; /* Tek satır yaparak yatay alanı açtık */
     fixed-height:     false;
-    spacing:          10px;
-    scrollbar:        false;
+    spacing:          6px;
+    scrollbar:        true;
     background-color: transparent;
 }
 
