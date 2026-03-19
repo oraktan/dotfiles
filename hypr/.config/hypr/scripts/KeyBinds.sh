@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
-# Simple Hyprland keybind viewer for rofi
-
 set -euo pipefail
 
-# ---- kill blockers -----------------------------------------
 pkill yad 2>/dev/null || true
 pidof rofi >/dev/null && pkill rofi
 
-# ---- files --------------------------------------------------
 CONF_FILES=(
   "$HOME/.config/hypr/Keybinds.conf"
 )
@@ -15,7 +11,6 @@ CONF_FILES=(
 ROFI_THEME="$HOME/.config/rofi/config-keybinds.rasi"
 MSG="🔍 Hyprland Keybinds (type to search)"
 
-# ---- extract + format --------------------------------------
 parse_binds() {
   awk '
   function trim(s){gsub(/^[ \t]+|[ \t]+$/,"",s); return s}
@@ -53,7 +48,6 @@ parse_binds() {
   }'
 }
 
-# ---- build list --------------------------------------------
 LIST=""
 for f in "${CONF_FILES[@]}"; do
   [[ -f "$f" ]] || continue
@@ -63,8 +57,16 @@ done
 
 [[ -z "$LIST" ]] && exit 1
 
-# ---- rofi --------------------------------------------------
 printf '%s\n' "$LIST" \
   | sort -u \
-  | rofi -dmenu -i -mesg "$MSG" -config "$ROFI_THEME"
-
+  | rofi -dmenu \
+      -i \
+      -matching fuzzy \
+      -sorting-method fzf \
+      -no-sort \
+      -no-fixed-num-lines \
+      -lines 20 \
+      -width 60 \
+      -p "🔍 Keybinds" \
+      -mesg "$MSG" \
+      -config "$ROFI_THEME"

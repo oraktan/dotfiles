@@ -37,7 +37,6 @@ alias home='cd ~'
 alias desktop='cd ~/Desktop'
 alias downloads='cd ~/Downloads'
 
-alias doc='cd ~/Downloads'
 alias duh='du -h --max-depth=1'
 alias empty-trash='rm -rf ~/.local/share/Trash/*'
 alias untar='tar -zxvf'
@@ -95,7 +94,6 @@ alias gz='cd ~/.config/zsh'
 # Notlar klasörüne git (Buradaki yolu kendine göre düzenle)
 alias gn='cd ~/.config/notlarim'
 alias g.='cd ~/dotfiles'
-alias T.='Thunar .'
 # Dotfiles otomatik güncelleme fonksiyonu
 gitu() {
     # Eğer bir mesaj girilirse onu kullan, girilmezse varsayılan mesajı atar
