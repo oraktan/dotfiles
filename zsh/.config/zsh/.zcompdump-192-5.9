@@ -29,7 +29,6 @@ _comps=(
 'add-zle-hook-widget' '_add-zle-hook-widget'
 'add-zsh-hook' '_add-zsh-hook'
 'admin' '_sccs'
-'ags' '_ags'
 'ali' '_mh'
 'alias' '_alias'
 'amaya' '_webbrowser'
@@ -81,7 +80,6 @@ _comps=(
 'atq' '_at'
 'atrm' '_at'
 'attr' '_attr'
-'atuin' '_atuin'
 'augtool' '_augeas'
 'auto-apt' '_auto-apt'
 'autoload' '_typeset'
@@ -160,12 +158,6 @@ _comps=(
 'caffeinate' '_caffeinate'
 'cal' '_cal'
 'calendar' '_calendar'
-'calibre' '_calibre'
-'calibredb' '_calibre'
-'calibre-debug' '_calibre'
-'calibre-server' '_calibre'
-'calibre-smtp' '_calibre'
-'cargo' '_cargo'
 'cat' '_cat'
 'catchsegv' '_precommand'
 'cc' '_gcc'
@@ -331,6 +323,8 @@ _comps=(
 'dnf4' '_dnf'
 'dnf5' '_dnf5'
 'doas' '_doas'
+'docker' '_docker'
+'dockerd' '_docker'
 'dolphin' '_dolphin'
 'domainname' '_yp'
 'dos2unix' '_dos2unix'
@@ -371,11 +365,6 @@ _comps=(
 'dwb' '_webbrowser'
 'e2label' '_e2label'
 'eatmydata' '_precommand'
-'ebook-convert' '_calibre'
-'ebook-edit' '_calibre'
-'ebook-meta' '_calibre'
-'ebook-polish' '_calibre'
-'ebook-viewer' '_calibre'
 'ecasound' '_ecasound'
 'echotc' '_echotc'
 'echoti' '_echoti'
@@ -413,7 +402,6 @@ _comps=(
 'extcheck' '_java'
 'extract' '_extract'
 'extractres' '_psutils'
-'eza' '_eza'
 'fakeroot' '_fakeroot'
 'false' '_nothing'
 'fastfetch' '_fastfetch'
@@ -423,7 +411,6 @@ _comps=(
 'fd' '_fd'
 'feh' '_feh'
 'fetch' '_fetch'
-'fetch-ebook-metadata' '_calibre'
 'fetchmail' '_fetchmail'
 'ffmpeg' '_ffmpeg'
 'fg' '_jobs_fg'
@@ -841,8 +828,6 @@ _comps=(
 'lpr' '_lp'
 'lprm' '_lp'
 'lpstat' '_lp'
-'lrf2lrs' '_calibre'
-'lrfviewer' '_calibre'
 'ls' '_ls'
 'lsattr' '_lsattr'
 'lsblk' '_lsblk'
@@ -870,6 +855,7 @@ _comps=(
 'lzop' '_lzop'
 'm-a' '_module-assistant'
 'mac2unix' '_dos2unix'
+'machinectl' '_machinectl'
 'madison' '_madison'
 'magnum' '_openstack'
 'mail' '_mail'
@@ -1162,13 +1148,11 @@ _comps=(
 'postqueue' '_postfix'
 'postsuper' '_postfix'
 'powerd' '_powerd'
-'powerprofilesctl' '_powerprofilesctl'
 'pr' '_pr'
 'prev' '_mh'
 'print' '_print'
 'printenv' '_printenv'
 'printf' '_print'
-'procs' '_procs'
 'procstat' '_procstat'
 'prompt' '_prompt'
 'prove' '_prove'
@@ -1300,6 +1284,8 @@ _comps=(
 'ruby-mri' '_ruby'
 'run0' '_run0'
 'run-help' '_run-help'
+'run-on-ac' '_tlp-run-on'
+'run-on-bat' '_tlp-run-on'
 'rup' '_hosts'
 'rusage' '_precommand'
 'rview' '_vim'
@@ -1463,6 +1449,7 @@ _comps=(
 'systemd-inhibit' '_systemd-inhibit'
 'systemd-machine-id-setup' '_systemd'
 'systemd-notify' '_systemd'
+'systemd-nspawn' '_systemd-nspawn'
 'systemd-path' '_systemd-path'
 'systemd-resolve' '_resolvectl'
 'systemd-run' '_systemd-run'
@@ -1505,6 +1492,8 @@ _comps=(
 'tkinfo' '_texinfo'
 'tla' '_tla'
 'tload' '_tload'
+'tlp' '_tlp'
+'tlp-stat' '_tlp-stat'
 'tmux' '_tmux'
 'todo' '_devtodo'
 'todo.sh' '_todo.sh'
@@ -1951,20 +1940,20 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
-autoload -Uz _extract _z _dnf5 _ags _atuin \
-            _bat _bluetoothctl _bootctl _busctl _bwrap \
-            _calibre _cargo _coredumpctl _curl _dolphin \
-            _eza _fastfetch _fd _firewalld _flatpak \
-            _ghostty _hg _hostnamectl _hyprctl _hyprpm \
-            _journalctl _kdeconnect _kde-inhibit _kernel-install _konsole \
-            _krunner _kscreen-doctor _libinput _localectl _loginctl \
-            _lsd _mpv _networkctl _nvme _oomctl \
-            _p11-kit _plasmashell _playerctl _podman _powerprofilesctl \
-            _procs _pulseaudio _resolvectl _rg _run0 \
-            _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files _skopeo \
-            _swww _systemctl _systemd _systemd-analyze _systemd-delta \
-            _systemd-inhibit _systemd-path _systemd-run _systemd-tmpfiles _systemsettings \
-            _timedatectl _toolbox _trust _udevadm _udisks2 \
+autoload -Uz _extract _z _dnf5 _bat _bluetoothctl \
+            _bootctl _busctl _bwrap _coredumpctl _curl \
+            _docker _dolphin _fastfetch _fd _firewalld \
+            _flatpak _ghostty _hg _hostnamectl _hyprctl \
+            _hyprpm _journalctl _kdeconnect _kde-inhibit _kernel-install \
+            _konsole _krunner _kscreen-doctor _libinput _localectl \
+            _loginctl _lsd _machinectl _mpv _networkctl \
+            _nvme _oomctl _p11-kit _plasmashell _playerctl \
+            _podman _pulseaudio _rclone _resolvectl _rg \
+            _run0 _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files \
+            _skopeo _swww _systemctl _systemd _systemd-analyze \
+            _systemd-delta _systemd-inhibit _systemd-nspawn _systemd-path _systemd-run \
+            _systemd-tmpfiles _systemsettings _timedatectl _tlp _tlp-run-on \
+            _tlp-stat _toolbox _trust _udevadm _udisks2 \
             _upower _varlinkctl _wl-copy _wlogout _wl-paste \
             _wpctl _ya _yazi _yt-dlp _zoxide \
             _a2ps _a2utils _aap _abcde _absolute_command_paths \
@@ -2166,5 +2155,5 @@ autoload -Uz +X _call_program
 typeset -gUa _comp_assocs
 _comp_assocs=( '' )
 
-#omz revision: 93f0e9113cf7d1e576525f1f28f6de0d94776f89
-#omz fpath: /home/thinkpad/.config/oh-my-zsh/plugins/common-aliases /home/thinkpad/.config/oh-my-zsh/plugins/fzf /home/thinkpad/.config/oh-my-zsh/plugins/extract /home/thinkpad/.config/oh-my-zsh/plugins/z /home/thinkpad/.config/oh-my-zsh/plugins/sudo /home/thinkpad/.config/oh-my-zsh/plugins/zsh-history-substring-search /home/thinkpad/.config/oh-my-zsh/plugins/zsh-syntax-highlighting /home/thinkpad/.config/oh-my-zsh/plugins/zsh-autosuggestions /home/thinkpad/.config/oh-my-zsh/plugins/dnf /home/thinkpad/.config/oh-my-zsh/plugins/git /home/thinkpad/dotfiles/oh-my-zsh/.config/oh-my-zsh/functions /home/thinkpad/dotfiles/oh-my-zsh/.config/oh-my-zsh/completions /home/thinkpad/.config/oh-my-zsh/functions /home/thinkpad/.config/oh-my-zsh/completions /home/thinkpad/dotfiles/oh-my-zsh/.config/oh-my-zsh/cache/completions /usr/local/share/zsh/site-functions /usr/share/zsh/site-functions /usr/share/zsh/5.9/functions
+#omz revision: 44394e7225cd2e2200fa2e6a0ed957fed6a4d5d0
+#omz fpath: /home/thinkpad/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/thinkpad/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions /home/thinkpad/.config/oh-my-zsh/custom/plugins/zsh-history-substring-search /home/thinkpad/.config/oh-my-zsh/plugins/common-aliases /home/thinkpad/.config/oh-my-zsh/plugins/fzf /home/thinkpad/.config/oh-my-zsh/plugins/extract /home/thinkpad/.config/oh-my-zsh/plugins/z /home/thinkpad/.config/oh-my-zsh/plugins/sudo /home/thinkpad/.config/oh-my-zsh/plugins/dnf /home/thinkpad/.config/oh-my-zsh/plugins/git /home/thinkpad/.config/oh-my-zsh/functions /home/thinkpad/.config/oh-my-zsh/completions /home/thinkpad/.config/oh-my-zsh/custom/functions /home/thinkpad/.config/oh-my-zsh/custom/completions /home/thinkpad/.config/oh-my-zsh/cache/completions /usr/local/share/zsh/site-functions /usr/share/zsh/site-functions /usr/share/zsh/5.9/functions
