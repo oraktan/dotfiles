@@ -46,8 +46,10 @@ alias pyserve='python3 -m http.server'
 alias catx='batcat'
 alias gitc='git clone https://www.github.com/'
 alias mkcd='func(){ mkdir -p "$1" && cd "$1"; }; func'
-
-alias fif='grep -iR'
+#f alias fif='grep -iR'
+fif() {
+    rg -i "$1" | rg -i "$2"
+}
 alias vim='nvim'
 #alias yy='wl-copy'
 alias pp='xclip -selection clipboard -o'
@@ -107,3 +109,4 @@ gitu() {
 }
 
 alias pdf='zathura'
+alias f='fzf'
