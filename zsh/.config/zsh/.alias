@@ -47,9 +47,9 @@ alias catx='batcat'
 alias gitc='git clone https://www.github.com/'
 alias mkcd='func(){ mkdir -p "$1" && cd "$1"; }; func'
 #f alias fif='grep -iR'
-fif() {
-    rg -i "$1" | rg -i "$2"
-}
+# fif() {
+    # rg -i "$1" | rg -i "$2"
+# }
 alias vim='nvim'
 #alias yy='wl-copy'
 alias pp='xclip -selection clipboard -o'
@@ -109,4 +109,44 @@ gitu() {
 }
 
 alias pdf='zathura'
-alias f='fzf'
+# alias f='fzf'
+# fcd: Dosyayı bul ve klasörüne git
+# fe: Dosyayı bul ve Neovim ile aç (Telescope tarzı)
+# fif: Find In Files (Telescope Live Grep benzeri)
+fif() {
+  local file
+  file=$(rg --line-number --column --no-heading --color=always --smart-case "" | \
+    fzf --ansi --preview 'bat --color=always --style=numbers --highlight-line {2} {1}')
+  
+  # Dosya adını ve satır numarasını ayıkla
+  if [ -n "$file" ]; then
+    local filename=$(echo $file | cut -d: -f1)
+    local line=$(echo $file | cut -d: -f2)
+    nvim "+$line" "$filename"
+  fi
+}
+# fcd: Dosyayı fzf ile seç ve o dizine git
+f() {
+  local target
+  # --max-depth parametresini kaldırdık (Sınırsız derinlik)
+  # --strip-cwd-prefix: Başındaki ./ işaretini kaldırır, daha temiz görünür
+  # --exclude .git: Hız için git klasörünü taramaz
+  target=$( (fd --type d --hidden --exclude .git; fd --type f --hidden --exclude .git) | fzf \
+    --preview '[[ -d {} ]] && ls -C {} || (bat --color=always --style=numbers --line-range :500 {} || cat {})' \
+    --header "Enter: Dizinse Git / Dosyaysa Vim" \
+    --layout=reverse)
+
+  # Eğer seçim boşsa çık
+  if [ -z "$target" ]; then
+    return
+  fi
+
+  # Hedef dizin mi kontrol et
+  if [ -d "$target" ]; then
+    cd "$target" && ls -p --color=auto
+    echo -e "\n\033[1;34m📂 Dizine gidildi:\033[0m $PWD"
+  else
+    # Dosya ise nvim ile aç
+    nvim "$target"
+  fi
+}
