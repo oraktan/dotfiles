@@ -65,15 +65,13 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 alias cat='bat'
-
-setopt appendhistory
-DISABLE_AUTO_TITLE="true"
-
-# =====================================================
-# 6. FASTFETCH (En Sonda Olması Daha Sağlıklı)
-# =====================================================
-if [[ -f "$HOME/.config/fastfetch/config-compact.jsonc" ]]; then
-    fastfetch -c "$HOME/.config/fastfetch/config-compact.jsonc" \
-              --logo "$HOME/.config/fastfetch/fedora.png" \
-              --logo-width 22 --logo-height 12
-fi
+# setopt appendhistory
+# DISABLE_AUTO_TITLE="true"
+#sysinfo_once() {
+  add-zsh-hook -d precmd sysinfo_once
+  echo
+  echo "🖥  $(uname -srmo)"
+  echo "🧠 RAM: $(free -h | awk '/Mem:/ {print $3 " / " $2}')"
+  echo "⏱  Uptime: $(uptime -p)"
+  echo
+}
