@@ -144,3 +144,6 @@ f() {
     nvim "$target"
   fi
 }
+alias wifi='nm-applet --indicator &'
+
+
