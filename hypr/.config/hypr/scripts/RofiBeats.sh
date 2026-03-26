@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# /* ---- 💫 MPlayer Integrated - Fedora & Hyprland 💫 ---- */ ##
+# /* ---- 💫 MPV Integrated - Fedora & Hyprland 💫 ---- */ ##
 
 mDIR="$HOME/Music/"
 iDIR="$HOME/.config/swaync/icons"
@@ -8,35 +8,33 @@ rofi_theme_menu="$HOME/.config/rofi/config-rofi-Beats-menu.rasi"
 music_list="$HOME/.config/rofi/online_music.list"
 
 notification() {
-    notify-send -u normal -i "$iDIR/music.png" "MPlayer" "$@"
+    notify-send -u normal -i "$iDIR/music.png" "Music Player" "$@"
 }
 
-# Çalışan mplayer süreçlerini durdurur
+# Çalışan müzik süreçlerini temizle
 stop_music() {
-    if pgrep -x "mplayer" > /dev/null; then
-        pkill -x "mplayer"
-        notification "Müzik Durduruldu"
-    else
-        notification "Zaten hiçbir şey çalmıyor."
-    fi
+    pkill -x "mpv" > /dev/null 2>&1
+    notification "Müzik Durduruldu"
 }
 
 play_local_music() {
-    # Müzik dosyalarını tara
+    # Müzik dosyalarını bul (boşluklu dosya adları için güvenli yöntem)
     mapfile -t local_music < <(find -L "$mDIR" -type f \( -iname "*.mp3" -o -iname "*.flac" -o -iname "*.wav" -o -iname "*.ogg" -o -iname "*.m4a" \))
     
+    [[ ${#local_music[@]} -eq 0 ]] && { notification "Hata" "Müzik klasörü boş!"; exit 1; }
+
     filenames=()
     for file in "${local_music[@]}"; do filenames+=("$(basename "$file")"); done
 
-    choice=$(printf "%s\n" "${filenames[@]}" | rofi -i -dmenu -config "$rofi_theme" -theme-str 'entry { placeholder: "🎵 MPlayer: Yerel Müzik Seç"; }')
+    choice=$(printf "%s\n" "${filenames[@]}" | rofi -i -dmenu -config "$rofi_theme" -theme-str 'entry { placeholder: "🎵 MPV: Yerel Müzik Seç"; }')
 
     [[ -z "$choice" ]] && exit 1
 
     for ((i = 0; i < "${#filenames[@]}"; ++i)); do
         if [ "${filenames[$i]}" = "$choice" ]; then
-            stop_music
-            # MPlayer'ı arka planda (really-quiet modunda) başlat
-            mplayer -really-quiet "${local_music[$i]}" > /dev/null 2>&1 &
+            pkill -x "mpv" > /dev/null 2>&1
+            # mpv ile arka planda sadece ses (no-video) çal
+            mpv --no-video --msg-level=all=no "${local_music[$i]}" > /dev/null 2>&1 &
             notification "Şu an çalıyor:" "$choice"
             break
         fi
@@ -45,34 +43,33 @@ play_local_music() {
 
 play_online_music() {
     if [ ! -s "$music_list" ]; then
-        notification "Hata" "Müzik listesi boş!"
-        exit 0
+        notification "Hata" "Müzik listesi boş veya dosya yok!"
+        exit 1
     fi
 
-    choice=$(awk -F'|' '{print $1}' "$music_list" | sort | rofi -i -dmenu -config "$rofi_theme" -theme-str 'entry { placeholder: "🌐 MPlayer: Radyo Seç"; }')
+    choice=$(awk -F'|' '{print $1}' "$music_list" | sort | rofi -i -dmenu -config "$rofi_theme" -theme-str 'entry { placeholder: "🌐 MPV: Online/YouTube Seç"; }')
     [[ -z "$choice" ]] && exit 1
     link=$(awk -F'|' -v name="$choice" '$1 == name {print $2; exit}' "$music_list")
 
-    stop_music
-    notification "URL Yükleniyor:" "$choice"
+    pkill -x "mpv" > /dev/null 2>&1
+    notification "Bağlanıyor..." "$choice"
     
-    # MPlayer ile stream/URL çalma
-    mplayer -really-quiet "$link" > /dev/null 2>&1 &
+    # MPV + yt-dlp entegrasyonu ile YouTube/Stream çalma
+    mpv --no-video --ytdl-format="bestaudio" --cache=yes "$link" > /dev/null 2>&1 &
 }
 
 shuffle_music() {
-    stop_music
+    pkill -x "mpv" > /dev/null 2>&1
     notification "Karışık Çalma Başladı"
-    # Tüm müzikleri bul, karıştır (shuf) ve mplayer playlist'ine at
-    find -L "$mDIR" -type f \( -iname "*.mp3" -o -iname "*.flac" -o -iname "*.wav" -o -iname "*.ogg" -o -iname "*.m4a" \)| shuf > /tmp/mplayer_playlist.txt
-    mplayer -really-quiet -playlist /tmp/mplayer_playlist.txt > /dev/null 2>&1 &
+    # Tüm müzikleri mDIR içinden tara ve karıştırarak mpv'ye ver
+    mpv --no-video --shuffle --playlist-start=random "$mDIR" > /dev/null 2>&1 &
 }
 
-user_choice=$(printf "%s\n" "Play from Online Stations" "Play from Music directory" "Shuffle Play from Music directory" "Stop MPlayer" | rofi -dmenu -config "$rofi_theme_menu" -theme-str 'entry { placeholder: "🎧 MPlayer Menu"; }')
+user_choice=$(printf "%s\n" "Play from Online Stations" "Play from Music directory" "Shuffle Play from Music directory" "Stop Music Player" | rofi -dmenu -config "$rofi_theme_menu" -theme-str 'entry { placeholder: "🎧 Music Menu (mpv)"; }')
 
 case "$user_choice" in
     "Play from Online Stations") play_online_music ;;
     "Play from Music directory") play_local_music ;;
     "Shuffle Play from Music directory") shuffle_music ;;
-    "Stop MPlayer") stop_music ;;
+    "Stop Music Player") stop_music ;;
 esac
