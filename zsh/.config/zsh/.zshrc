@@ -1,10 +1,8 @@
-# =====================================================
-# 1. POWERLEVEL10K INSTANT PROMPT (En Üstte Kalmalı)
-# =====================================================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # =====================================================
 # 2. ORTAM DEĞİŞKENLERİ VE YOLLAR
 # =====================================================
@@ -67,11 +65,3 @@ alias lt='ls --tree'
 alias cat='bat'
 # setopt appendhistory
 # DISABLE_AUTO_TITLE="true"
-#sysinfo_once() {
-  add-zsh-hook -d precmd sysinfo_once
-  echo
-  echo "🖥  $(uname -srmo)"
-  echo "🧠 RAM: $(free -h | awk '/Mem:/ {print $3 " / " $2}')"
-  echo "⏱  Uptime: $(uptime -p)"
-  echo
-}
