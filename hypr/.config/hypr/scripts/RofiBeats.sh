@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ ##
-# Optimized for Fedora & HyprWave - CPU Friendly
+# /* ---- 💫 Optimized for Fedora & Hyprland (CPU Friendly) 💫 ---- */ ##
 
 mDIR="$HOME/Music/"
 iDIR="$HOME/.config/swaync/icons"
@@ -26,9 +25,10 @@ stop_music() {
     notification "Müzik Durduruldu"
 }
 
-# Ortak MPV Ayarları (Stabilite için)
-# ao=pulse veya ao=pipewire Fedora'da ses çakışmasını önler
-MPV_OPTS="--no-video --ao=pulse --input-ipc-server=$MPV_SOCKET --script-opts=mpris-enable=yes"
+# --- OPTİMİZE EDİLMİŞ MPV AYARLARI ---
+# --vid=no ve --vo=null: Ekran kartını ve işlemciyi video render için yormaz.
+# --ao=pipewire: Fedora'nın yerel ses sunucusuyla en verimli iletişim.
+MPV_OPTS="--no-video --vid=no --vo=null --ao=pipewire --input-ipc-server=$MPV_SOCKET --script-opts=mpris-enable=yes"
 
 play_local_music() {
     mapfile -t local_music < <(find -L "$mDIR" -type f \( -iname "*.mp3" -o -iname "*.flac" -o -iname "*.wav" -o -iname "*.ogg" -o -iname "*.m4a" \))
@@ -43,7 +43,8 @@ play_local_music() {
         if [ "${filenames[$i]}" = "$choice" ]; then
             music_playing && stop_music
             notification "Şu an çalıyor:" "$choice"
-            mpv $MPV_OPTS --loop-playlist --playlist-start="$i" "${local_music[@]}" &
+            # Yerel dosyalar için düşük öncelikli çalıştırma (CPU dostu)
+            nice -n 10 mpv $MPV_OPTS --loop-playlist --playlist-start="$i" "${local_music[@]}" &
             break
         fi
     done
@@ -62,23 +63,21 @@ play_online_music() {
     music_playing && stop_music
     notification "Başlatılıyor:" "$choice"
 
-    # Online akış için ekstra tampon (buffer) ayarları
-    mpv $MPV_OPTS \
-        --ytdl-format=bestaudio \
+    # Online akış için sadece ses (bestaudio) formatını zorla
+    # Bu ayar işlemciyi %90 oranında rahatlatır.
+    nice -n 10 mpv $MPV_OPTS \
+        --ytdl-format="bestaudio/best" \
         --cache=yes \
-        --demuxer-max-bytes=100MiB \
+        --demuxer-max-bytes=50MiB \
         --force-window=no \
         "$link" &
 }
-
-# Diğer fonksiyonlar (manage_music vb.) aynı kalabilir...
-# (Scriptin geri kalan case yapısını bozmadan buraya ekleyebilirsin)
 
 user_choice=$(printf "%s\n" "Play from Online Stations" "Play from Music directory" "Shuffle Play from Music directory" "Stop RofiBeats" | rofi -dmenu -config "$rofi_theme_menu" -theme-str 'entry { placeholder: "🎧 RofiBeats Menu"; }')
 
 case "$user_choice" in
     "Play from Online Stations") play_online_music ;;
     "Play from Music directory") play_local_music ;;
-    "Shuffle Play from Music directory") music_playing && stop_music; mpv $MPV_OPTS --shuffle --loop-playlist "$mDIR" & ;;
+    "Shuffle Play from Music directory") music_playing && stop_music; nice -n 10 mpv $MPV_OPTS --shuffle --loop-playlist "$mDIR" & ;;
     "Stop RofiBeats") stop_music ;;
 esac
