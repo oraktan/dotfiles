@@ -146,4 +146,4 @@ f() {
 }
 alias wifi='nm-applet --indicator &'
 
-
+alias ts='sudo timeshift --create --rsync --snapshot-device /dev/sda1 --comments "Fedora_Tam_Sistem_Yedegi"'
