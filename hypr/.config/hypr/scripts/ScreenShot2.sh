@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Taner Orak - Hyprland Screenshot Script (Instant Clipboard & Swappy)
+
 # Değişkenler
 dir="$(xdg-user-dir PICTURES)/Screenshots"
 iDIR="$HOME/.config/swaync/icons"
@@ -12,21 +14,23 @@ mkdir -p "$dir"
 notify_and_sound() {
     local file_path=$1
     if [[ -f "$file_path" && -s "$file_path" ]]; then
-        # Ekran görüntüsü başarılıysa ses çal
+        # Clipboard'a kopyala (Garantilemek için)
+        wl-copy < "$file_path"
+        
+        # Ses çal
         if [[ -f "${sDIR}/Sounds.sh" ]]; then
             "${sDIR}/Sounds.sh" --screenshot
         fi
         
-        # Bildirim gönder (Aç ve Sil butonlarıyla)
+        # Bildirim
         resp=$(notify-send -t 10000 -A action1="Aç" -A action2="Sil" \
-            -i "$iDIR/picture.png" "Ekran Görüntüsü" "Kaydedildi: $(basename "$file_path")")
+            -i "$iDIR/picture.png" "Ekran Görüntüsü" "Kaydedildi ve Panoya Kopyalandı.")
         
         case "$resp" in
             action1) xdg-open "$file_path" ;;
             action2) rm "$file_path" ;;
         esac
     else
-        # Eğer dosya boşsa veya oluşmadıysa (ESC'ye basıldıysa)
         if [[ -f "$file_path" ]]; then rm "$file_path"; fi
         notify-send -u low -i "$iDIR/error.png" "İptal Edildi" "Ekran görüntüsü alınmadı."
     fi
@@ -35,37 +39,36 @@ notify_and_sound() {
 # Modlar
 case "$1" in
     --now)
-        # Tüm ekranı çek
         file="${dir}/screenshot_$(date +%Y%m%d_%H%M%S).png"
         hyprshot -m output -o "$dir" -f "$(basename "$file")" --silent
         notify_and_sound "$file"
         ;;
     --area)
-        # Bölge seçerek çek
         file="${dir}/screenshot_$(date +%Y%m%d_%H%M%S).png"
         hyprshot -m region -o "$dir" -f "$(basename "$file")" --silent
         notify_and_sound "$file"
         ;;
     --win)
-        # Pencere seçerek çek
         file="${dir}/screenshot_$(date +%Y%m%d_%H%M%S).png"
         hyprshot -m window -o "$dir" -f "$(basename "$file")" --silent
         notify_and_sound "$file"
         ;;
     --swappy)
-        # Önce geçici dosya oluşturarak garantili yöntemle swappy aç
         tmp_file="/tmp/swappy_buffer.png"
         rm -f "$tmp_file"
         
-        # grim ve slurp kullanarak bölgeyi seç ve geçici dosyaya yaz
-        # Hyprshot'ın pipe hatasını bu şekilde bypass ediyoruz
+        # 1. Seçimi yap ve geçici dosyaya kaydet
         if grim -g "$(slurp)" "$tmp_file"; then
-            swappy -f "$tmp_file"
-            # Swappy kapandıktan sonra dosyayı kalıcı klasöre de kopyalamak istersen burayı kullanabilirsin
-            # cp "$tmp_file" "${dir}/swappy_$(date +%s).png"
+            # 2. ANINDA PANAYA KOPYALA (Swappy beklenmeden)
+            wl-copy < "$tmp_file"
+            
+            # 3. Swappy'yi aç (Düzenleme biterse güncel hali tekrar kopyalar)
+            # -o - ifadesi çıktıyı wl-copy'ye yönlendirir.
+            swappy -f "$tmp_file" -o - | wl-copy
+            
             rm "$tmp_file"
         else
-            notify-send "İptal" "Seçim yapılmadı."
+            notify-send -u low "İptal" "Seçim yapılmadı."
         fi
         ;;
     *)
