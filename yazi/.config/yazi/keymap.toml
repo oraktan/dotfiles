@@ -122,3 +122,13 @@ desc = "Bulunulan dizindeki PDF'leri birleştir (Merge PDF)"
 on = ["g", "a"]
 run = 'ghostty -e sh -c "cd \"$PWD\"; exec $SHELL"'
 desc = "Open directory in Ghostty"
+
+[[mgr.prepend_keymap]]
+on = ["g", "1"]
+run  = "cd ~/DriveINFO"
+desc = "Google Drive klasörüne git"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "2" ]
+run  = 'cd "~/DriveINFO/Personel Evrakları/"'
+desc = "Personel Evrakları klasörüne git"
