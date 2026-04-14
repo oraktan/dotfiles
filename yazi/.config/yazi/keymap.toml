@@ -132,3 +132,8 @@ desc = "Google Drive klasörüne git"
 on   = [ "g", "2" ]
 run  = 'cd "~/DriveINFO/Personel Evrakları/"'
 desc = "Personel Evrakları klasörüne git"
+
+[[mgr.prepend_keymap]]
+on   = [ "w" ]
+run  = "close"
+desc = "Task panelini göster"
