@@ -5,14 +5,29 @@ mkdir -p "$(dirname "$PIN_FILE")"
 touch "$PIN_FILE"
 
 # --- MENÜ OLUŞTURMA ---
-
 PINNED=$(sed 's/^/󰐃 [PİN] /' "$PIN_FILE")
-HISTORY=$(cliphist list)
-
+HISTORY=$(cliphist list | nl -w2 -s'. ')
 MENU_OPTIONS="󰆴 TÜM GEÇMİŞİ SİL\n$PINNED\n$HISTORY"
 
-# --- ROFI ---
+# --- MOUSE'U ORTALA (ROFI AÇILDIKTAN SONRA) ---
+(
+    sleep 0.2
+MONITOR_INFO=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true)')
 
+WIDTH=$(echo "$MONITOR_INFO" | jq '.width')
+HEIGHT=$(echo "$MONITOR_INFO" | jq '.height')
+X=$(echo "$MONITOR_INFO" | jq '.x')
+Y=$(echo "$MONITOR_INFO" | jq '.y')
+
+# ortayı hesapla
+CENTER_X=$((X + WIDTH / 2))
+CENTER_Y=$((Y + HEIGHT / 2))
+
+# mouse'u doğru monitöre taşı
+hyprctl dispatch movecursor $CENTER_X $CENTER_Y
+) &
+
+# --- ROFI ---
 selected=$(echo -e "$MENU_OPTIONS" | rofi -dmenu -i \
     -p "📋 Clipboard" \
     -kb-custom-1 "Alt+p" \
@@ -27,25 +42,22 @@ selected=$(echo -e "$MENU_OPTIONS" | rofi -dmenu -i \
     -kb-custom-10 "8" \
     -kb-custom-11 "9" \
     -mesg "Alt+p: Pin | Alt+d: Sil | 1-9: Hızlı seç" \
-    -config ~/.config/rofi/config.rasi)
+    -config ~/.config/rofi/config.rasi \
+    -hover-select -me-select-entry '' -me-accept-entry MousePrimary)
 
 EXIT_CODE=$?
 
-# --- NUMARA SEÇİMİ ---
+# --- HIZLI SEÇİM (1-9) ---
 if [ $EXIT_CODE -ge 12 ] && [ $EXIT_CODE -le 20 ]; then
     KEY_PRESSED=$((EXIT_CODE - 11))
     selected=$(cliphist list | sed -n "${KEY_PRESSED}p")
 fi
 
-# boşsa çık
 [ -z "$selected" ] && exit
 
-# PIN etiketi temizle
 clean_item=$(echo "$selected" | sed 's/^󰐃 \[PİN\] //')
 
-# --- AKSİYONLAR ---
-
-# 🔥 TÜM GEÇMİŞİ SİL
+# --- TÜM GEÇMİŞİ SİL ---
 if [ "$selected" = "󰆴 TÜM GEÇMİŞİ SİL" ]; then
     cliphist wipe
     > "$PIN_FILE"
@@ -53,7 +65,7 @@ if [ "$selected" = "󰆴 TÜM GEÇMİŞİ SİL" ]; then
     exit
 fi
 
-# 🔥 ALT+P → PIN / UNPIN
+# --- PIN EKLE / KALDIR ---
 if [ "$EXIT_CODE" -eq 10 ]; then
     if grep -Fxq "$clean_item" "$PIN_FILE"; then
         grep -Fxv "$clean_item" "$PIN_FILE" > "$PIN_FILE.tmp"
@@ -66,22 +78,20 @@ if [ "$EXIT_CODE" -eq 10 ]; then
     exit
 fi
 
-# 🔥 ALT+D → geçmişten sil (sadece history için mantıklı)
+# --- SİL ---
 if [ "$EXIT_CODE" -eq 11 ]; then
     echo "$clean_item" | cliphist delete
     notify-send "Clipboard" "Silindi"
     exit
 fi
 
-# --- NORMAL SEÇİM (FIX BURADA) ---
-
+# --- KOPYALA ---
 if echo "$selected" | grep -q "^󰐃 \[PİN\]"; then
-    # PIN ise direkt kopyala
     echo -n "$clean_item" | wl-copy
 else
-    # history ise decode et
     echo "$clean_item" | cliphist decode | wl-copy
 fi
 
+# --- OTOMATİK YAPIŞTIR ---
 sleep 0.1
 wtype -M ctrl v -m ctrl
