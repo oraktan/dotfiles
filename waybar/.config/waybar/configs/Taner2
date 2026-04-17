@@ -42,11 +42,11 @@
 	"battery", 
 	"backlight",
 	"bluetooth",
-	"network",
 	"custom/updater",
 	"custom/cycle_wall",
 	"custom/nightlight",
 	"custom/lock", 
+	"network"
 	],
 },
 
@@ -83,8 +83,8 @@
 	],
 
 "modules-right": [
+  "custom/netw",
 	"hyprland/window",
-	"tray",
 	"group/notify",
 	"mpris",
 	"pulseaudio",
@@ -92,12 +92,14 @@
 	"pulseaudio#microphone",	  
 	"custom/nightlight",
 	"custom/power",
+	"tray"
 	],  
     
 
    
 "modules-center": [
     "hyprland/workspaces#single",
-    "custom/windowscount#2"
+    "custom/windowscount#2",
+    "custom/vpn"
 ],
 }],

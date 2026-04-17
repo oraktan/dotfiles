@@ -474,4 +474,22 @@
     "on-click": "hyprctl dispatch fullscreen 1"
 },
 
+"custom/vpn": {
+    "format": "{}",
+    "interval": 1,
+    "return-type": "text",
+    "on-click": "nmcli con up thinkpad",
+    "exec": "if nmcli -t -f NAME,TYPE con show --active | grep -q '^thinkpad:vpn'; then IP=$(curl -s ifconfig.me); echo \"🔒 $IP\"; else echo \"🔓 OFF\"; fi",
+    "on-click-right": "nmcli con down thinkpad",
+    "tooltip": false
+},
+
+"custom/netw": {
+    "exec": "~/.config/hypr/scripts/network.sh",
+    "interval": 1,
+    "on-click": "~/.config/hypr/scripts/network.sh toggle_wifi",
+    "on-click-right": "nmcli -t -f NAME con show --active | grep -q '^thinkpad$' && nmcli con down thinkpad || nmcli con up thinkpad",
+    "on-click-middle": "kitty -e nmtui",
+    "tooltip": false
+}
 }
