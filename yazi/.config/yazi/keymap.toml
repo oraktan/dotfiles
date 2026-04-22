@@ -142,3 +142,8 @@ desc = "Personel Evrakları klasörüne git"
 on   = [ "w" ]
 run  = "close"
 desc = "Task panelini göster"
+
+[[mgr.prepend_keymap]]
+on   = [ "m", "p" ] # 'm' sonra 'p' tuşuna basınca çalışır (merge pdf)
+run  = 'shell "/home/thinkpad/dotfiles/scripts/scripts/mergeAllpdf.sh \"$@\"" --block'
+desc = "Seçili PDF ve görselleri birleştir"
