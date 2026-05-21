@@ -83,7 +83,7 @@ desc = "Klasörleri başa al"
 
 [[mgr.prepend_keymap]]
 on   = [ "T"] # 'G' yerine istediğin tuşu atayabilirsin
-run = 'shell "thunar . &" --block'
+run = 'shell "dolphin . &" --block'
 desc = "Bulunan klasörü Thunar ile aç"
 
 
@@ -124,8 +124,8 @@ run  = 'shell "bash ~/dotfiles/scripts/scripts/mergeAllpdf.sh \"$@\"" --confirm'
 desc = "Bulunulan dizindeki PDF'leri birleştir (Merge PDF)"
 
 [[mgr.prepend_keymap]]
-on = ["g", "a"]
-run = 'ghostty -e sh -c "cd \"$PWD\"; exec $SHELL"'
+on   = ["g", "a"]
+run  = 'shell "ghostty -e sh -c \"cd $PWD && exec $SHELL\" &" --block'
 desc = "Open directory in Ghostty"
 
 [[mgr.prepend_keymap]]
@@ -138,6 +138,13 @@ on   = [ "g", "2" ]
 run  = 'cd "~/DriveINFO/Personel Evrakları/"'
 desc = "Personel Evrakları klasörüne git"
 
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "P" ]
+run  = 'cd "~/Documents/Personel_Evraklar/"'
+desc = "Personel Evrakları klasörüne git"
+
+
 [[mgr.prepend_keymap]]
 on   = [ "w" ]
 run  = "close"
@@ -147,3 +154,15 @@ desc = "Task panelini göster"
 on   = [ "m", "p" ] # 'm' sonra 'p' tuşuna basınca çalışır (merge pdf)
 run  = 'shell "/home/thinkpad/dotfiles/scripts/scripts/mergeAllpdf.sh \"$@\"" --block'
 desc = "Seçili PDF ve görselleri birleştir"
+
+[[mgr.prepend_keymap]]
+on   = [ "b" ]
+run  = 'shell "~/.config/yazi/copy_to_whatsapp.sh \"$@\""'
+desc = "WhatsApp'a Kopyala"
+
+[[mgr.prepend_keymap]]
+on   = [ "t" ]
+run  = "tab_create --current"
+desc = "Yeni sekme aç"
+
+

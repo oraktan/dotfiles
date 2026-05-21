@@ -15,7 +15,7 @@ Create a `.luarc.json` file in your project root:
 <!-- prettier-ignore -->
 ```json5
 {
-  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "$:schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
   "runtime.version": "Lua 5.5",
   "workspace.library": [
     // You may need to change the path to your local plugin directory
