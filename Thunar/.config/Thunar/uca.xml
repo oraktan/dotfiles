@@ -5,7 +5,7 @@
 	<name>Merge All PDf</name>
 	<submenu></submenu>
 	<unique-id>1772457459305938-1</unique-id>
-	<command>/home/thinkpad/dotfiles/scripts/scripts/mergeAllpdf.sh %F</command>
+	<command>~/dotfiles/scripts/scripts/mergeAllpdf.sh %F</command>
 	<description>Merge All</description>
 	<range>*</range>
 	<patterns>*</patterns>
