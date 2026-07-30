@@ -165,4 +165,17 @@ on   = [ "t" ]
 run  = "tab_create --current"
 desc = "Yeni sekme aç"
 
+[[mgr.prepend_keymap]]
+on   = [ "z", "z" ]
+run  = "shell 'zathura \"$@\"' --orphan"
+desc = "PDF - Zathura ile aç"
 
+[[mgr.prepend_keymap]]
+on   = [ "z", "w" ]
+run  = "shell 'abiword \"$@\"' --orphan"
+desc = "Word - AbiWord ile aç"
+
+[[mgr.prepend_keymap]]
+on   = [ "z", "e" ]
+run  = "shell 'gnumeric \"$@\"' --orphan"
+desc = "Excel - Gnumeric ile aç"

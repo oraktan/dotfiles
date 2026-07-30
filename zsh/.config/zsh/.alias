@@ -91,6 +91,7 @@ alias gp='cd ~/Pictures'
 
 # Downloads klasörüne git
 alias gd='cd ~/Downloads'
+alias gD='cd ~/Documents'
 
 alias gh='cd ~/.config/hypr'
 alias gz='cd ~/.config/zsh'
@@ -98,6 +99,7 @@ alias gz='cd ~/.config/zsh'
 alias gn='cd ~/.config/notlarim'
 alias g.='cd ~/dotfiles'
 alias T.='Thunar .'
+alias gy='cd ~/.config/yazi'
 # Dotfiles otomatik güncelleme fonksiyonu
 gitu() {
     # Eğer bir mesaj girilirse onu kullan, girilmezse varsayılan mesajı atar
@@ -151,3 +153,5 @@ alias pkill='pkill -9 -f'
 alias ts='sudo timeshift --create --rsync --snapshot-device /dev/sda1 --comments "Fedora_Tam_Sistem_Yedegi"'
 alias signal='flatpak run org.signal.Signal'
 alias stremio='flatpak run com.stremio.Stremio'
+
+
