@@ -1,0 +1,15 @@
+
+# Machine-local Hyprland files
+/hypr/.config/hypr/monitors.conf
+/hypr/.config/hypr/hyprland.conf.backup-*
+
+# Generated files - machine local
+**/.zcompdump-*
+/hypr/.config/hypr/wallpaper_effects/.wallpaper_current*
+/ghostty/.config/ghostty/wallust.conf
+/hypr/.config/hypr/wallust/wallust-hyprland.conf
+/rofi/.config/rofi/wallust/colors-rofi.rasi
+/waybar/.config/waybar/wallust/colors-waybar.css
+
+# Machine-local startup configuration
+/hypr/.config/hypr/UserConfigs/Startup_Local.conf
