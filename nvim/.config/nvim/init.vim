@@ -22,6 +22,10 @@ Plug 'chentoast/marks.nvim'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+
+
+
 call plug#end()
 
 
@@ -50,6 +54,9 @@ augroup END
 " Renk tanımlarını Vim tarafında yapalım (Daha güvenlidir)
 highlight MarkLineHL guibg=#fabd2f guifg=#282828 ctermbg=214 ctermfg=235
 highlight MarkSignHL guifg=#fabd2f gui=bold ctermfg=214 cterm=bold
+
+nnoremap <leader>c i```<CR><CR>```<Esc>ki
+
 "
 "lua << EOF
 "require'marks'.setup({
