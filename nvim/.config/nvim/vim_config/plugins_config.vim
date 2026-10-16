@@ -1,18 +1,1 @@
 " Add here plug and write :PlugInstall 
-
-call plug#begin('~/.vim/plugged')
-
-" Örnek eklentiler:
-Plug 'preservim/nerdtree'         " Dosya gezgini
-Plug 'tpope/vim-fugitive'         " Git entegrasyonu
-Plug 'itchyny/lightline.vim'      " Hafif status bar
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Hızlı arama
-Plug 'junegunn/fzf.vim'               " FZF için Vim entegrasyonu
-Plug 'jiangmiao/auto-pairs'           " Parantez eşleştirme
-Plug 'tpope/vim-commentary'           " Yorum satırı ekleme
-Plug 'Yggdroot/indentLine'            " Girinti çizgileri
-Plug 'morhetz/gruvbox'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
-call plug#end()
-

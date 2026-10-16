@@ -1,3 +1,5 @@
 bashrc/.bash_history
 zsh/.config/zsh/.zcompdump*
 hypr/.config/hypr/wallpaper_effects/.wallpaper_current
+
+*.vim.bak

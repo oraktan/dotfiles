@@ -1,12 +1,11 @@
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 " Temalar ve Görünüm
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'nvim-tree/nvim-web-devicons'  " Dosya ikonları için şart
-Plug 'itchyny/lightline.vim'        " Mevcut eklentin
 " Araçlar
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'    " <- Tırnakların böyle olduğundan emin ol
