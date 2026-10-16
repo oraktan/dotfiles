@@ -7,3 +7,7 @@ require("git"):setup()
 
 -- Durum çubuğuna (status bar) daha fazla detay ekler
 require("git"):setup()
+require("whoosh"):setup {
+  bookmarks = {},
+  jump_notify = false,
+}

@@ -130,18 +130,18 @@ desc = "Open directory in Ghostty"
 
 [[mgr.prepend_keymap]]
 on = ["g", "1"]
-run  = "cd ~/DriveINFO"
+run  = "cd ~/info_Drive"
 desc = "Google Drive klasörüne git"
 
 [[mgr.prepend_keymap]]
 on   = [ "g", "2" ]
-run  = 'cd "~/DriveINFO/Personel Evrakları/"'
+run  = 'cd "~/tnrork_Drive/"'
 desc = "Personel Evrakları klasörüne git"
 
 
 [[mgr.prepend_keymap]]
 on   = [ "g", "P" ]
-run  = 'cd "~/Documents/Personel_Evraklar/"'
+run  = 'cd "~/Documents/PersonelEvraklari/"'
 desc = "Personel Evrakları klasörüne git"
 
 
@@ -152,11 +152,11 @@ desc = "Task panelini göster"
 
 [[mgr.prepend_keymap]]
 on   = [ "m", "p" ] # 'm' sonra 'p' tuşuna basınca çalışır (merge pdf)
-run  = 'shell "/home/thinkpad/dotfiles/scripts/scripts/mergeAllpdf.sh \"$@\"" --block'
+run  = 'shell "/home/turkinform/dotfiles/scripts/scripts/mergeAllpdf.sh $@" --block'
 desc = "Seçili PDF ve görselleri birleştir"
 
 [[mgr.prepend_keymap]]
-on   = [ "b" ]
+on   = [ "W" ]
 run  = 'shell "~/.config/yazi/copy_to_whatsapp.sh \"$@\""'
 desc = "WhatsApp'a Kopyala"
 
@@ -166,3 +166,17 @@ run  = "tab_create --current"
 desc = "Yeni sekme aç"
 
 
+[[mgr.prepend_keymap]]
+on = [ "b", "a" ]
+run = "plugin whoosh save"
+desc = "Add bookmark (hovered file/directory)"
+
+[[mgr.prepend_keymap]]
+on = [ "b", "g" ]
+run = "plugin whoosh jump_by_key"
+desc = "Jump bookmark by key"
+
+[[mgr.prepend_keymap]]
+on = [ "b", "f" ]
+run = "plugin whoosh jump_by_fzf"
+desc = "Jump bookmark by fzf"

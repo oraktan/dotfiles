@@ -4,7 +4,7 @@ linemode = "mtime"
 sort_by      = "mtime"     # "name", "size", "mtime", "extension" gibi
 sort_sensitive = false     # Büyük/küçük harf duyarlılığı
 sort_reverse   = true      # Büyükten küçüğe (descending) için true
-sort_dir_first = true      # Klasörleri her zaman en üstte göster
+sort_dir_first = false  # Klasörleri her zaman en üstte göster
 
 name = "name"
 display = "name"

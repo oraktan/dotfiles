@@ -5,10 +5,26 @@
 	<name>Merge All PDf</name>
 	<submenu></submenu>
 	<unique-id>1772457459305938-1</unique-id>
-	<command>/home/thinkpad/dotfiles/scripts/scripts/mergeAllpdf.sh %F</command>
+	<command>/home/turkinform/dotfiles/scripts/scripts/mergeAllpdf.sh %F</command>
 	<description>Merge All</description>
 	<range>*</range>
 	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>photo</name>
+	<submenu></submenu>
+	<unique-id>1784032235660788-2</unique-id>
+	<command>/home/turkinform/scripts/foto.sh %F</command>
+	<description>foto</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
 	<audio-files/>
 	<image-files/>
 	<other-files/>
@@ -70,5 +86,15 @@
 	<range></range>
 	<patterns>*.iso;*.ISO;*.tar.gz;*.TAR.GZ;*.zip;*.ZIP</patterns>
 	<other-files/>
+</action>
+<action>
+	<icon></icon>
+	<name></name>
+	<submenu></submenu>
+	<unique-id>1784031695349907-1</unique-id>
+	<command></command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
 </action>
 </actions>

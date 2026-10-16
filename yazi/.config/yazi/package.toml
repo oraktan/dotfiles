@@ -8,5 +8,10 @@ use = "yazi-rs/plugins:zoom"
 rev = "6f50636"
 hash = "6ce49cf5b4c7c0d9cce8a1062ed478d3"
 
+[[plugin.deps]]
+use = "WhoSowSee/whoosh"
+rev = "ec2e6f7"
+hash = "59e984146fa6b20c441817444d5fdd61"
+
 [flavor]
 deps = []
