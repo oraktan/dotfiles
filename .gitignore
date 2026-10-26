@@ -13,3 +13,6 @@
 
 # Machine-local startup configuration
 /hypr/.config/hypr/UserConfigs/Startup_Local.conf
+
+# Yazi rsync local state
+/yazi/.config/yazi/plugins/rsync.yazi/.last_target

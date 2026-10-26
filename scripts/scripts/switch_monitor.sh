@@ -1,30 +1,39 @@
-#!/bin/bash
-if [ "$1" = "laptop" ]; then
-    cat ~/.config/hypr/monitors_laptop.conf > ~/.config/hypr/monitors_active.conf
-    notify-send "Monitor" "laptop.conf aktif edildi" --icon=display
-    sleep 1
-    for i in 1 2 3 4 5; do hyprctl dispatch moveworkspacetomonitor $i eDP-1; done
+#!/usr/bin/env bash
+set -euo pipefail
 
-elif [ "$1" = "laptop2" ]; then
-    cat ~/.config/hypr/monitors_laptop2.conf > ~/.config/hypr/monitors_active.conf
-    notify-send "Monitor" "laptop2.conf aktif edildi" --icon=display
-    sleep 1
-    for i in 1 2 3 4 5; do hyprctl dispatch moveworkspacetomonitor $i DP-5; done
-    for i in 6 7 8 9 10; do hyprctl dispatch moveworkspacetomonitor $i DP-2; done
+REPO="$HOME/dotfiles"
+PROFILE_MANAGER="$REPO/scripts/select-profile.sh"
 
-elif [ "$1" = "desktop" ]; then
-    cat ~/.config/hypr/monitors_desktop.conf > ~/.config/hypr/monitors_active.conf
-    notify-send "Monitor" "desktop.conf aktif edildi" --icon=display
-    sleep 1
-    for i in 1 2 3 4 5; do hyprctl dispatch moveworkspacetomonitor $i DP-5; done
-    for i in 6 7 8 9 10; do hyprctl dispatch moveworkspacetomonitor $i DP-2; done
+profile="${1:-}"
 
-else
-    notify-send "Monitor" "Argüman verilmedi! (laptop, laptop2, desktop)" --icon=error
+case "$profile" in
+    desktop)
+        selected="home"
+        ;;
+    laptop|laptop2)
+        echo "Bu makinede laptop monitor profili devre disi."
+        exit 1
+        ;;
+    *)
+        echo "Kullanim: $0 desktop"
+        exit 1
+        ;;
+esac
+
+current="$(readlink -f "$REPO/hypr/.config/hypr/monitors.conf")"
+expected="$REPO/profiles/home/monitors.conf"
+
+if [[ "$current" != "$expected" ]]; then
+    echo "HATA: Bu makinede Home profili aktif degil."
+    exit 1
 fi
 
-if hyprctl reload; then
-    notify-send "Hyprland" "Config reload başarılı ✓" --icon=display
-else
-    notify-send "Hyprland" "Config reload BAŞARISIZ ✗" --icon=error
+"$PROFILE_MANAGER" "$selected" --apply
+
+if command -v hyprctl >/dev/null 2>&1; then
+    hyprctl reload
+fi
+
+if command -v notify-send >/dev/null 2>&1; then
+    notify-send "Monitor" "Home profili aktif"
 fi

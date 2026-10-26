@@ -179,3 +179,9 @@ desc = "Word - AbiWord ile aç"
 on   = [ "z", "e" ]
 run  = "shell 'gnumeric \"$@\"' --orphan"
 desc = "Excel - Gnumeric ile aç"
+
+[[mgr.prepend_keymap]]
+on   = [ "U"]
+run  = "plugin rsync -- --remember"
+desc = "Copy files using rsync"
+
