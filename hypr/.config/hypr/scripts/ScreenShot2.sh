@@ -2,27 +2,21 @@
 
 # Taner Orak - Hyprland Screenshot Script (Instant Clipboard & Swappy)
 
-# Değişkenler
 dir="$(xdg-user-dir PICTURES)/Screenshots"
 iDIR="$HOME/.config/swaync/icons"
 sDIR="$HOME/.config/hypr/scripts"
 
-# Klasör yoksa oluştur
 mkdir -p "$dir"
 
-# Bildirim ve Ses Fonksiyonu
 notify_and_sound() {
     local file_path=$1
     if [[ -f "$file_path" && -s "$file_path" ]]; then
-        # Clipboard'a kopyala (Garantilemek için)
-        wl-copy < "$file_path"
+        wl-copy --type image/png < "$file_path"
         
-        # Ses çal
         if [[ -f "${sDIR}/Sounds.sh" ]]; then
             "${sDIR}/Sounds.sh" --screenshot
         fi
         
-        # Bildirim
         resp=$(notify-send -t 10000 -A action1="Aç" -A action2="Sil" \
             -i "$iDIR/picture.png" "Ekran Görüntüsü" "Kaydedildi ve Panoya Kopyalandı.")
         
@@ -36,7 +30,6 @@ notify_and_sound() {
     fi
 }
 
-# Modlar
 case "$1" in
     --now)
         file="${dir}/screenshot_$(date +%Y%m%d_%H%M%S).png"
@@ -54,24 +47,28 @@ case "$1" in
         notify_and_sound "$file"
         ;;
     --swappy)
-        tmp_file="/tmp/swappy_buffer.png"
-        rm -f "$tmp_file"
-        
-        # 1. Seçimi yap ve geçici dosyaya kaydet
-        if grim -g "$(slurp)" "$tmp_file"; then
-            # 2. ANINDA PANAYA KOPYALA (Swappy beklenmeden)
-            wl-copy < "$tmp_file"
-            
-            # 3. Swappy'yi aç (Düzenleme biterse güncel hali tekrar kopyalar)
-            # -o - ifadesi çıktıyı wl-copy'ye yönlendirir.
-            swappy -f "$tmp_file" -o - | wl-copy
-            
-            rm "$tmp_file"
-        else
-            notify-send -u low "İptal" "Seçim yapılmadı."
+    tmp_file="/tmp/swappy_buffer.png"
+    out_file="/tmp/swappy_out.png"
+    rm -f "$tmp_file" "$out_file"
+
+    if grim -g "$(slurp)" "$tmp_file"; then
+        # 1. Anında panoya kopyala (tipi belirterek)
+        wl-copy -t image/png < "$tmp_file"
+
+        # 2. Swappy'yi aç; sadece kaydedilirse (Ctrl+S) çıktı dosyası oluşur
+        swappy -f "$tmp_file" -o "$out_file"
+
+        # 3. Düzenlenip kaydedildiyse panoyu güncelle, aksi halde dokunma
+        if [[ -s "$out_file" ]]; then
+            wl-copy -t image/png < "$out_file"
         fi
-        ;;
-    *)
-        echo "Kullanım: --now | --area | --win | --swappy"
+
+        rm -f "$tmp_file" "$out_file"
+    else
+        notify-send -u low "İptal" "Seçim yapılmadı."
+    fi
+    ;; 
+      *)
+        echo "Kullanım: $0 {--now|--area|--win|--swappy}"
         ;;
 esac

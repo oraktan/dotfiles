@@ -55,19 +55,23 @@ alias vim='nvim'
 alias pp='xclip -selection clipboard -o'
 #alias yy='bash -c "cat \"\$1\" | wl-copy" --'
 # yy fonksiyonu: Dosya içeriğini kopyalar
+
 yy() {
-    if [ -n "$1" ]; then
-        if [ -f "$1" ]; then
-            cat "$1" | wl-copy
-            echo "✅ '$1' panoya kopyalandı."
-        else
-            echo "❌ Hata: '$1' bir dosya değil."
-        fi
+    if [[ $# -eq 0 ]]; then
+        echo "💡 Kullanım:"
+        echo "   yy dosya.txt       → Dosya içeriğini kopyala"
+        echo "   yy git status      → Komut çıktısını kopyala"
+        echo "   yy ls -lah         → Komut çıktısını kopyala"
+        return 1
+    fi
+
+    if [[ $# -eq 1 && -f "$1" ]]; then
+        wl-copy < "$1"
+        echo "✅ '$1' dosyasının içeriği panoya kopyalandı."
     else
-        echo "💡 Kullanım: yy dosya_adı"
+        "$@" 2>&1 | tee >(wl-copy)
     fi
 }
-
 alias duf='du -sh * 2>/dev/null | sort -h'
 
 # Not ekleme fonksiyonu (Tarih damgalı)
@@ -150,3 +154,8 @@ alias wifi='nm-applet --indicator &'
 alias pkill='pkill -9 -f'
 alias ts='sudo timeshift --create --rsync --snapshot-device /dev/sda1 --comments "Fedora_Tam_Sistem_Yedegi"'
 alias signal='flatpak run org.signal.Signal'
+
+
+cprun() {
+  "$@" 2>&1 | tee >(wl-copy)
+}

@@ -1,0 +1,4 @@
+# yorum satırı
+imail: info@turkinform.com.tr
+tc: 46240894030
+imza: Saygılarımla,\n Taner Orak

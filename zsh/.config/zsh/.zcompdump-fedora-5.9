@@ -1,4 +1,4 @@
-#files: 1054	version: 5.9
+#files: 1059	version: 5.9
 
 _comps=(
 '-' '_precommand'
@@ -158,7 +158,11 @@ _comps=(
 'caffeinate' '_caffeinate'
 'cal' '_cal'
 'calendar' '_calendar'
-'cargo' '_cargo'
+'calibre' '_calibre'
+'calibredb' '_calibre'
+'calibre-debug' '_calibre'
+'calibre-server' '_calibre'
+'calibre-smtp' '_calibre'
 'cat' '_cat'
 'catchsegv' '_precommand'
 'cc' '_gcc'
@@ -366,6 +370,11 @@ _comps=(
 'dwb' '_webbrowser'
 'e2label' '_e2label'
 'eatmydata' '_precommand'
+'ebook-convert' '_calibre'
+'ebook-edit' '_calibre'
+'ebook-meta' '_calibre'
+'ebook-polish' '_calibre'
+'ebook-viewer' '_calibre'
 'ecasound' '_ecasound'
 'echotc' '_echotc'
 'echoti' '_echoti'
@@ -403,6 +412,7 @@ _comps=(
 'extcheck' '_java'
 'extract' '_extract'
 'extractres' '_psutils'
+'eza' '_eza'
 'fakeroot' '_fakeroot'
 'false' '_nothing'
 'fastfetch' '_fastfetch'
@@ -412,6 +422,7 @@ _comps=(
 'fd' '_fd'
 'feh' '_feh'
 'fetch' '_fetch'
+'fetch-ebook-metadata' '_calibre'
 'fetchmail' '_fetchmail'
 'ffmpeg' '_ffmpeg'
 'fg' '_jobs_fg'
@@ -522,6 +533,7 @@ _comps=(
 'ggetopt' '_getopt'
 'ggrep' '_grep'
 'ggv' '_gnome-gv'
+'gh' '_gh'
 'ghead' '_head'
 'ghostscript' '_ghostscript'
 'ghostty' '_ghostty'
@@ -686,7 +698,6 @@ _comps=(
 'hotjava' '_webbrowser'
 'htop' '_htop'
 'hwinfo' '_hwinfo'
-'hyprctl' '_hyprctl'
 'hyprpm' '_hyprpm'
 'iceweasel' '_mozilla'
 'icombine' '_ispell'
@@ -775,6 +786,7 @@ _comps=(
 'kpartx' '_kpartx'
 'kpdf' '_pdf'
 'krunner' '_krunner'
+'kscreenctl' '_kscreenctl'
 'kscreen-doctor' '_kscreen-doctor'
 'ksh' '_sh'
 'ksh88' '_sh'
@@ -829,6 +841,8 @@ _comps=(
 'lpr' '_lp'
 'lprm' '_lp'
 'lpstat' '_lp'
+'lrf2lrs' '_calibre'
+'lrfviewer' '_calibre'
 'ls' '_ls'
 'lsattr' '_lsattr'
 'lsblk' '_lsblk'
@@ -856,7 +870,6 @@ _comps=(
 'lzop' '_lzop'
 'm-a' '_module-assistant'
 'mac2unix' '_dos2unix'
-'machinectl' '_machinectl'
 'madison' '_madison'
 'magnum' '_openstack'
 'mail' '_mail'
@@ -998,6 +1011,7 @@ _comps=(
 'nmap' '_nmap'
 'nmblookup' '_samba'
 'nmcli' '_networkmanager'
+'nnn' '_nnn'
 'nocorrect' '_precommand'
 'noglob' '_precommand'
 'nohup' '_precommand'
@@ -1154,6 +1168,7 @@ _comps=(
 'print' '_print'
 'printenv' '_printenv'
 'printf' '_print'
+'procs' '_procs'
 'procstat' '_procstat'
 'prompt' '_prompt'
 'prove' '_prove'
@@ -1366,6 +1381,7 @@ _comps=(
 'smbstatus' '_samba'
 'smit' '_smit'
 'smitty' '_smit'
+'snapper' '_snapper'
 'snoop' '_snoop'
 'soa' '_hosts'
 'socket' '_socket'
@@ -1426,7 +1442,8 @@ _comps=(
 'svnliteadmin' '_subversion'
 'swaks' '_swaks'
 'swanctl' '_swanctl'
-'swayimg' '_swayimg'
+'swaync' '_swaync'
+'swaync-client' '_swaync-client'
 'swift' '_swift'
 'swiftc' '_swift'
 'sw_vers' '_sw_vers'
@@ -1446,11 +1463,11 @@ _comps=(
 'systemd-cgtop' '_systemd'
 'systemd-delta' '_systemd-delta'
 'systemd-detect-virt' '_systemd'
+'systemd-hwdb' '_systemd-hwdb'
 'systemd-id128' '_systemd-id128'
 'systemd-inhibit' '_systemd-inhibit'
 'systemd-machine-id-setup' '_systemd'
 'systemd-notify' '_systemd'
-'systemd-nspawn' '_systemd-nspawn'
 'systemd-path' '_systemd-path'
 'systemd-resolve' '_resolvectl'
 'systemd-run' '_systemd-run'
@@ -1943,19 +1960,20 @@ bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
 autoload -Uz _extract _z _dnf5 _bat _bluetoothctl \
-            _bootctl _busctl _bwrap _cargo _coredumpctl \
-            _curl _dnf5 _docker _dolphin _fastfetch \
-            _fd _firewalld _flatpak _ghostty _hg \
-            _hostnamectl _hyprctl _hyprpm _insmod _journalctl \
-            _kdeconnect _kde-inhibit _kernel-install _konsole _krunner \
-            _kscreen-doctor _libinput _localectl _loginctl _lsd \
-            _lsmod _machinectl _mpv _networkctl _nvme \
-            _oomctl _p11-kit _plasmashell _playerctl _podman \
-            _pulseaudio _rclone _resolvectl _rg _rmmod \
-            _run0 _sd_bus_address _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes \
-            _sd_unit_files _skopeo _swayimg _swww _systemctl \
-            _systemd _systemd-analyze _systemd-delta _systemd-id128 _systemd-inhibit \
-            _systemd-nspawn _systemd-path _systemd-run _systemd-tmpfiles _systemsettings \
+            _bootctl _busctl _bwrap _calibre _coredumpctl \
+            _curl _dnf5 _docker _dolphin _eza \
+            _fastfetch _fd _firewalld _flatpak _gh \
+            _ghostty _hg _hostnamectl _hyprpm _insmod \
+            _journalctl _kdeconnect _kde-inhibit _kernel-install _konsole \
+            _krunner _kscreenctl _kscreen-doctor _libinput _localectl \
+            _loginctl _lsd _lsmod _mpv _networkctl \
+            _nnn _nvme _oomctl _p11-kit _plasmashell \
+            _playerctl _podman _procs _pulseaudio _rclone \
+            _resolvectl _rg _rmmod _run0 _sd_bus_address \
+            _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files _skopeo \
+            _snapper _swaync _swaync-client _swww _systemctl \
+            _systemd _systemd-analyze _systemd-delta _systemd-hwdb _systemd-id128 \
+            _systemd-inhibit _systemd-path _systemd-run _systemd-tmpfiles _systemsettings \
             _timedatectl _toolbox _trust _udevadm _udisks2 \
             _upower _userdbctl _varlinkctl _wl-copy _wlogout \
             _wl-paste _wpctl _ya _yazi _yt-dlp \
@@ -2158,5 +2176,5 @@ autoload -Uz +X _call_program
 typeset -gUa _comp_assocs
 _comp_assocs=( '' )
 
-#omz revision: 114141757492cf5c06d224befb69a4b121b83b50
-#omz fpath: /home/thinkpad/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/thinkpad/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions /home/thinkpad/.config/oh-my-zsh/custom/plugins/zsh-history-substring-search /home/thinkpad/.config/oh-my-zsh/plugins/common-aliases /home/thinkpad/.config/oh-my-zsh/plugins/fzf /home/thinkpad/.config/oh-my-zsh/plugins/extract /home/thinkpad/.config/oh-my-zsh/plugins/z /home/thinkpad/.config/oh-my-zsh/plugins/sudo /home/thinkpad/.config/oh-my-zsh/plugins/dnf /home/thinkpad/.config/oh-my-zsh/plugins/git /home/thinkpad/.config/oh-my-zsh/functions /home/thinkpad/.config/oh-my-zsh/completions /home/thinkpad/.config/oh-my-zsh/custom/functions /home/thinkpad/.config/oh-my-zsh/custom/completions /home/thinkpad/.config/oh-my-zsh/cache/completions /usr/local/share/zsh/site-functions /usr/share/zsh/site-functions /usr/share/zsh/5.9/functions
+#omz revision: 12a09eda85df0bed2605ecd38a5f080e75da12d0
+#omz fpath: /home/fedora/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/fedora/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions /home/fedora/.config/oh-my-zsh/custom/plugins/zsh-history-substring-search /home/fedora/.config/oh-my-zsh/plugins/common-aliases /home/fedora/.config/oh-my-zsh/plugins/fzf /home/fedora/.config/oh-my-zsh/plugins/extract /home/fedora/.config/oh-my-zsh/plugins/z /home/fedora/.config/oh-my-zsh/plugins/sudo /home/fedora/.config/oh-my-zsh/plugins/dnf /home/fedora/.config/oh-my-zsh/plugins/git /home/fedora/.config/oh-my-zsh/functions /home/fedora/.config/oh-my-zsh/completions /home/fedora/.config/oh-my-zsh/custom/functions /home/fedora/.config/oh-my-zsh/custom/completions /home/fedora/.cache/oh-my-zsh/completions /usr/local/share/zsh/site-functions /usr/share/zsh/site-functions /usr/share/zsh/5.9/functions
