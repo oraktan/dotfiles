@@ -161,14 +161,57 @@ cprun() {
 
 
 unalias ll 2>/dev/null
-function ll {
-    printf "%-35s | %8s | %s\n" "Dosya Adı" "Boyut" "Oluşturulma Tarihi"
-    printf '%s\n' '------------------------------------+----------+-------------------'
 
-    command ls -lAhGgtr --time=birth --time-style=long-iso --quoting-style=literal |
-    awk 'NR>1 {
-        name=$0
-        sub(/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/, "", name)
-        printf "%-35s | %8s | %s %s\n", name, $3, $4, $5
-    }'
+function ll {
+    python3 - <<'PY'
+import os
+import subprocess
+from datetime import datetime
+
+def human_size(size):
+    for unit in ["B", "K", "M", "G", "T"]:
+        if size < 1024 or unit == "T":
+            return f"{size:.1f}{unit}" if unit != "B" else f"{size:.0f}B"
+        size /= 1024
+
+rows = []
+
+for entry in os.scandir("."):
+    info = entry.stat(follow_symlinks=False)
+
+    birth = int(subprocess.check_output(
+        ["stat", "-c", "%W", "--", entry.path],
+        text=True
+    ).strip())
+
+    if entry.is_symlink():
+        kind, color = "LINK", "\033[36m"
+    elif entry.is_dir():
+        kind, color = "DIR", "\033[34m"
+    else:
+        kind, color = "FILE", "\033[0m"
+
+    date = datetime.fromtimestamp(birth).strftime(
+        "%Y-%m-%d %H:%M"
+    ) if birth > 0 else "Bilinmiyor"
+
+    rows.append((
+        birth or info.st_mtime,
+        entry.name,
+        kind,
+        human_size(info.st_size),
+        date,
+        color
+    ))
+
+width = max([30] + [len(row[1]) for row in rows])
+reset = "\033[0m"
+
+print(f"\033[1;36m{'Dosya Adı':<{width}} | {'Tür':<6} | {'Boyut':>8} | Oluşturulma Tarihi{reset}")
+print("-" * width + "-+-" + "-" * 6 + "-+-" + "-" * 8 + "-+-" + "-" * 19)
+
+for _, name, kind, size, date, color in sorted(rows):
+    print(f"{color}{name:<{width}}{reset} | {kind:<6} | {size:>8} | {date}")
+
+PY
 }
