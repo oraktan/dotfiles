@@ -1,30 +1,35 @@
+
+
 [mgr]
 show_hidden = false
 linemode = "mtime"
-sort_by      = "mtime"     # "name", "size", "mtime", "extension" gibi
-sort_sensitive = false     # Büyük/küçük harf duyarlılığı
-sort_reverse   = true      # Büyükten küçüğe (descending) için true
-sort_dir_first = true      # Klasörleri her zaman en üstte göster
+sort_by = "mtime"
+sort_sensitive = false
+sort_reverse = true
+sort_dir_first = true
 
-name = "name"
-display = "name"
-
-[[mgr.append_columns]]
-name = "mtime"
-display = "mtime"
-format = "%Y-%m-%d %H:%M"  # Tarih formatı (Yıl-Ay-Gün Saat:Dakika)
-
-[[mgr.append_columns]]
-name = "size"
-display = "size"
-
-#[plugin]
-#prepend_previewers = [
-#    { name = "*.xlsx", run = "xlsx-preview" },
-#    { name = "*.xls", run = "xlsx-preview" },
-#    { mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", run = "xlsx-preview" }
-#]
+# DOSYA AÇICILARI
 [opener]
+
+edit = [
+    { run = 'nvim %s', block = true, desc = "Neovim", for = "unix" }
+]
+
 ghostty = [
-  { run = 'ghostty -e "$SHELL" -c "cd \"$1\"; exec $SHELL"', desc = "Open with Ghostty", block = false }
+    { run = 'ghostty -e "$SHELL" -c "cd \"$1\"; exec $SHELL"', desc = "Open with Ghostty", block = false, for = "unix" }
+]
+
+# DOSYA AÇMA KURALLARI
+[open]
+prepend_rules = [
+    { mime = "text/*", use = "edit" },
+    { mime = "application/json", use = "edit" },
+    { mime = "inode/empty", use = "edit" },
+    { url = "*.toml", use = "edit" },
+    { url = "*.yaml", use = "edit" },
+    { url = "*.yml", use = "edit" },
+    { url = "*.md", use = "edit" },
+    { url = "*.py", use = "edit" },
+    { url = "*.sh", use = "edit" },
+    { url = "*.lua", use = "edit" }
 ]
